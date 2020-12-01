@@ -6,7 +6,7 @@ namespace TestAdventOfCode
 {
     public class ExpepenseReport
     {
-        public (int, int) FindSum(List<int> numbers, int sum)
+        public static(int, int) FindSum(List<int> numbers, int sum)
         {
             foreach (int x in numbers)
             {
@@ -34,6 +34,20 @@ namespace TestAdventOfCode
                 numbers.Add(Convert.ToInt32(s));
             }
             return numbers;
+        }
+
+        public List<int> FindTrippleSum(List<int> numbers, int desiredSum)
+        {
+            int num2, num3;
+            foreach (int num1 in numbers)
+            {
+                (num2, num3) = ExpepenseReport.FindSum(numbers, desiredSum - num1);
+                if (num1 + num2 + num3 == desiredSum)
+                {
+                    return new List<int>() { num1, num2, num3 };
+                }
+            }
+            return new List<int>();
         }
     }
 }
