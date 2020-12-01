@@ -12,7 +12,8 @@ namespace TestAdventOfCode
         [Test]
         public void TestFindSum()
         {
-            AdventOfCode.ExpenseReport.FindSum();
+            ExpepenseReport report = new ExpepenseReport();
+            report.FindSum();
             Assert.Pass();
         }
     }
