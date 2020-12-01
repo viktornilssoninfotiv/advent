@@ -5,14 +5,11 @@ namespace TestAdventOfCode
 {
     public class ExpepenseReport
     {
-        public void FindSum()
+        public (int, int) FindSum(List<int> numbers, int sum)
         {
-            throw new NotImplementedException();
-        }
-
-        public (int x, int y) FindSum(List<int> numbers, int sum)
-        {
-            throw new NotImplementedException();
+            int x = 1;
+            int y = 2;
+            return (x, y);
         }
     }
 }
