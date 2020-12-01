@@ -7,9 +7,18 @@ namespace TestAdventOfCode
     {
         public (int, int) FindSum(List<int> numbers, int sum)
         {
-            int x = 1;
-            int y = 2;
-            return (x, y);
+            foreach (int x in numbers)
+            {
+                foreach (int y in numbers)
+                {
+                    if (x + y == sum)
+                    {
+                        return (x, y);
+                    }
+                }
+            }
+
+            return (0, 0);
         }
     }
 }
