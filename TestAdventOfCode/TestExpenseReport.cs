@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace TestAdventOfCode
 {
@@ -13,8 +14,12 @@ namespace TestAdventOfCode
         public void TestFindSum()
         {
             ExpepenseReport report = new ExpepenseReport();
-            report.FindSum();
-            Assert.Pass();
+            int x, y, sum;
+            var numbers = new List<int>() { 1, 2, 3, 4 };
+
+            sum = 3;
+            (x, y) = report.FindSum(numbers, sum);
+            Assert.AreEqual(x + y, sum);
         }
     }
 }
