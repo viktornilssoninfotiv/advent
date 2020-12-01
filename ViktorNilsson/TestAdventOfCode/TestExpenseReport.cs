@@ -9,6 +9,14 @@ namespace TestAdventOfCode
         public void Setup()
         {
         }
+        [Test]
+        public void TestGetInputData()
+        {
+            var numbers = new List<int>();
+            numbers = new ExpepenseReport().GetInputData();
+            Assert.IsNotNull(numbers);
+            Assert.Contains(1918, numbers);
+        }
 
         [Test]
         public void TestFindSum()
@@ -33,5 +41,6 @@ namespace TestAdventOfCode
             (x, y) = new ExpepenseReport().FindSum(numbers, sum);
             Assert.AreNotEqual(x + y, sum);
         }
+
     }
 }
