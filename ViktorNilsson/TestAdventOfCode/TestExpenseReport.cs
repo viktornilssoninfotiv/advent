@@ -5,13 +5,11 @@ using System.Linq;
 
 namespace TestAdventOfCode
 {
-    public class Tests
+    public class TestExpenseReport
     {
-        private List<int> numbers;
         [SetUp]
         public void Setup()
         {
-            this.numbers = new List<int>();
         }
         [Test]
         public void TestGetInputData()
@@ -27,7 +25,7 @@ namespace TestAdventOfCode
             int desiredSum = 5;
             var input = new List<int>() { 1, 2, 3, 4 };
 
-            numbers = ExpepenseReport.FindSum(input, desiredSum);
+            List<int> numbers = ExpepenseReport.FindSum(input, desiredSum);
             Assert.AreEqual(numbers.Count(), 2);
             Assert.AreEqual(numbers.Sum(), desiredSum);
             Assert.Contains(numbers[0], input);

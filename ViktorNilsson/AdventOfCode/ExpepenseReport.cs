@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace TestAdventOfCode
 {
-    public class ExpepenseReport
+    public class ExpepenseReport : InputDataHandler
     {
         public static List<int> FindSum(List<int> numbers, int sum)
         {
@@ -30,8 +30,7 @@ namespace TestAdventOfCode
         {
             var numbers = new List<int>();
             // Specify folder since it can be run from elsewhere, e.g. unittest
-            string fileContent = File.ReadAllText("../../../../AdventOfCode/DayOneInput.txt");
-            string[] stringNumbers = fileContent.Split('\n');
+            string[] stringNumbers = InputDataHandler.ReadFileAsArray("../../../../AdventOfCode/DayOneInput.txt");
 
             foreach (string s in stringNumbers)
             {
