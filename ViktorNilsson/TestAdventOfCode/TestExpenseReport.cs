@@ -7,15 +7,16 @@ namespace TestAdventOfCode
 {
     public class Tests
     {
+        private List<int> numbers;
         [SetUp]
         public void Setup()
         {
+            this.numbers = new List<int>();
         }
         [Test]
         public void TestGetInputData()
         {
-            var numbers = new List<int>();
-            numbers = new ExpepenseReport().GetInputData();
+            List<int> numbers = ExpepenseReport.GetInputData();
             Assert.IsNotNull(numbers);
             Assert.Contains(1918, numbers);
         }
@@ -23,38 +24,36 @@ namespace TestAdventOfCode
         [Test]
         public void TestFindSum()
         {
-            int x, y, sum;
-            var numbers = new List<int>() { 1, 2, 3, 4 };
+            int desiredSum = 5;
+            var input = new List<int>() { 1, 2, 3, 4 };
 
-            sum = 5;
-            (x, y) = ExpepenseReport.FindSum(numbers, sum);
-            Assert.AreEqual(x + y, sum);
-            Assert.Contains(x, numbers);
-            Assert.Contains(y, numbers);
+            numbers = ExpepenseReport.FindSum(input, desiredSum);
+            Assert.AreEqual(numbers.Count(), 2);
+            Assert.AreEqual(numbers.Sum(), desiredSum);
+            Assert.Contains(numbers[0], input);
+            Assert.Contains(numbers[1], input);
         }
 
         [Test]
         public void TestFindSumNotInSum()
         {
-            int x, y, sum;
-            var numbers = new List<int>() { 1, 2, 3, 4 };
+            int desiredSum = 20;
+            var input = new List<int>() { 1, 2, 3, 4 };
 
-            sum = 20;
-            (x, y) = ExpepenseReport.FindSum(numbers, sum);
-            Assert.AreNotEqual(x + y, sum);
+            List<int> numbers = ExpepenseReport.FindSum(input, desiredSum);
+            Assert.AreEqual(numbers.Count(), 0);
         }
 
         [Test]
         public void TestFindSumAnswer()
         {
-            int num1, num2;
             int desiredSum = 2020;
+
             // Find the answer to day 1 challange 1
-            ExpepenseReport report = new ExpepenseReport();
-            var input = report.GetInputData();
-            (num1, num2) = ExpepenseReport.FindSum(input, desiredSum);
-            Assert.AreEqual(num1 + num2, desiredSum);
-            int answer = num1 * num2;
+            var input = ExpepenseReport.GetInputData();
+            List<int> numbers = ExpepenseReport.FindSum(input, desiredSum);
+            Assert.AreEqual(numbers.Sum(), desiredSum);
+            int answer = numbers.Aggregate((x, y) => x * y);
             Console.Write(answer);
         }
 
@@ -62,12 +61,10 @@ namespace TestAdventOfCode
         public void TestFindTrippleSumAnwser()
         {
             int desiredSum = 2020;
-            var numbers = new List<int>();
 
             // Find the answer to day 1 challange 2
-            ExpepenseReport report = new ExpepenseReport();
-            var input = report.GetInputData();
-            numbers = report.FindTrippleSum(input, desiredSum);
+            var input = ExpepenseReport.GetInputData();
+            List<int> numbers = ExpepenseReport.FindTrippleSum(input, desiredSum);
             Assert.AreEqual(numbers.Sum(), desiredSum);
             int answer = numbers.Aggregate((x, y) => x * y);
             Console.Write(answer);
