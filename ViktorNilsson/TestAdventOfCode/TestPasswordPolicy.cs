@@ -70,17 +70,28 @@ namespace TestAdventOfCode
 
             int numberOfValidPasswords = PasswordPolicy.CountValidPasswords(passwordList);
             Console.WriteLine(numberOfValidPasswords);
+            Assert.AreEqual(536, numberOfValidPasswords);
         }
 
         [TestCase("1-3 a", "abcde", true)]
         [TestCase("1-3 b", "cdefg", false)]
         [TestCase("2-9 c", "ccccccccc", false)]
+        [TestCase("2-9 c", "ccccccccc", false)]
         public void TestPasswordPolicySelfCheck2(string policyRaw, string password, bool expectedValid)
         {
             PasswordPolicy policy = new PasswordPolicy(policyRaw);
 
-            bool valid = policy.Check(password);
+            bool valid = policy.Check2(password);
             Assert.AreEqual(expectedValid, valid);
+        }
+
+        [Test]
+        public void FindAnswerDayTwoPuzzleTwo()
+        {
+            List<PasswordPolicy> passwordList = PasswordPolicy.GetInputData();
+
+            int numberOfValidPasswords = PasswordPolicy.CountValidPasswords2(passwordList);
+            Console.WriteLine(numberOfValidPasswords);
         }
     }
 }
