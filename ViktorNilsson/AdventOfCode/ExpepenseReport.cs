@@ -1,33 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace TestAdventOfCode
 {
-    public class ExpepenseReport
+    public class ExpepenseReport : InputDataHandler
     {
-        public static(int, int) FindSum(List<int> numbers, int sum)
+        public static List<int> FindSum(List<int> numbers, int sum)
         {
+            var result = new List<int>();
             foreach (int x in numbers)
             {
                 foreach (int y in numbers)
                 {
                     if (x + y == sum)
                     {
-                        return (x, y);
+                        result.Add(x);
+                        result.Add(y);
+                        return result;
                     }
                 }
             }
 
-            return (0, 0);
+            return result;
         }
 
-        public List<int> GetInputData()
+        public static List<int> GetInputData()
         {
             var numbers = new List<int>();
             // Specify folder since it can be run from elsewhere, e.g. unittest
-            string fileContent = File.ReadAllText("../../../../AdventOfCode/DayOneInput.txt");
-            string[] stringNumbers = fileContent.Split('\n');
+            string[] stringNumbers = InputDataHandler.ReadFileAsArray("../../../../AdventOfCode/DayOneInput.txt");
 
             foreach (string s in stringNumbers)
             {
@@ -36,15 +39,16 @@ namespace TestAdventOfCode
             return numbers;
         }
 
-        public List<int> FindTrippleSum(List<int> numbers, int desiredSum)
+        public static List<int> FindTrippleSum(List<int> numbers, int desiredSum)
         {
-            int num2, num3;
+            var sum = new List<int>();
             foreach (int num1 in numbers)
             {
-                (num2, num3) = ExpepenseReport.FindSum(numbers, desiredSum - num1);
-                if (num1 + num2 + num3 == desiredSum)
+                sum = ExpepenseReport.FindSum(numbers, desiredSum - num1);
+                if (num1 + sum.Sum() == desiredSum)
                 {
-                    return new List<int>() { num1, num2, num3 };
+                    sum.Add(num1);
+                    return sum;
                 }
             }
             return new List<int>();
