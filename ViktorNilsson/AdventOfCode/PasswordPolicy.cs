@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace TestAdventOfCode
@@ -16,7 +15,7 @@ namespace TestAdventOfCode
         {
             this.policyRaw = policyRaw;
             string[] splitPolicy = policyRaw.Split();
-            
+
             string[] occurencePolicy = splitPolicy[0].Split('-');
             this.minOccurence = Int32.Parse(occurencePolicy[0]);
             this.maxOccurence = Int32.Parse(occurencePolicy[1]);
@@ -37,7 +36,7 @@ namespace TestAdventOfCode
             {
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }

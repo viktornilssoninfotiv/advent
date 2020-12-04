@@ -49,7 +49,7 @@ namespace TestAdventOfCode
         [Test]
         public void TestGetInputData()
         {
-            List <PasswordPolicy> passwordList = PasswordPolicy.GetInputData();
+            List<PasswordPolicy> passwordList = PasswordPolicy.GetInputData();
             Assert.AreEqual(1000, passwordList.Count());
         }
 

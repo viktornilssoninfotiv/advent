@@ -6,9 +6,9 @@ namespace TestAdventOfCode
     public class InputDataHandler
     {
 
-        public static string[] ReadFileAsArray(string filePath)
+        public static string[] ReadFileAsArray(string FilePath)
         {
-            string fileContent = File.ReadAllText(filePath);
+            string fileContent = File.ReadAllText(FilePath);
             string[] fileRows = fileContent.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             return fileRows;
         }

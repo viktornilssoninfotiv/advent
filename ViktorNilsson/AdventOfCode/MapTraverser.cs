@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TestAdventOfCode
+﻿namespace TestAdventOfCode
 {
     public class MapTraverser : InputDataHandler
     {
