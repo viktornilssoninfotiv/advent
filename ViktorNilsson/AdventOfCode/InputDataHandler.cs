@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace TestAdventOfCode
 {
@@ -8,7 +9,7 @@ namespace TestAdventOfCode
         public static string[] ReadFileAsArray(string filePath)
         {
             string fileContent = File.ReadAllText(filePath);
-            string[] fileRows = fileContent.Split('\n');
+            string[] fileRows = fileContent.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             return fileRows;
         }
     }
