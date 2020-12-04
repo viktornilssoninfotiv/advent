@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace TestAdventOfCode
@@ -29,6 +28,7 @@ namespace TestAdventOfCode
         public static List<int> GetInputData()
         {
             var numbers = new List<int>();
+
             // Specify folder since it can be run from elsewhere, e.g. unittest
             string[] stringNumbers = InputDataHandler.ReadFileAsArray("../../../../AdventOfCode/DayOneInput.txt");
 
@@ -36,6 +36,7 @@ namespace TestAdventOfCode
             {
                 numbers.Add(Convert.ToInt32(s));
             }
+
             return numbers;
         }
 
