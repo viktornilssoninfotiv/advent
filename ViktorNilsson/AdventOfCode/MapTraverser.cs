@@ -5,8 +5,8 @@ namespace TestAdventOfCode
     public class MapTraverser : InputDataHandler
     {
         private const char TreeChar = '#';
-        private int colMax;
-        private int rowMax;
+        private int colIdxMax;
+        private int rowIdxMax;
 
         public MapTraverser()
         {
@@ -20,8 +20,8 @@ namespace TestAdventOfCode
             int columns = stringMap[0].Length;
             char[,] map = new char[rows, columns];
 
-            this.colMax = columns;
-            this.rowMax = rows;
+            this.colIdxMax = columns;
+            this.rowIdxMax = rows;
 
             for (int row = 0; row < rows; row++)
             {
@@ -41,7 +41,7 @@ namespace TestAdventOfCode
             int row = 0;
 
             // Traverse until the bottom of the map
-            while (row < this.rowMax)
+            while (row < this.rowIdxMax)
             {
                 if (map[row, col] == MapTraverser.TreeChar)
                 {
@@ -52,9 +52,9 @@ namespace TestAdventOfCode
                 col += right;
 
                 // Map shall be repeated to the right
-                if (col > this.colMax)
+                if (col >= this.colIdxMax)
                 {
-                    col -= this.colMax;
+                    col -= this.colIdxMax;
                 }
             }
 

@@ -42,7 +42,7 @@ namespace TestAdventOfCode
             char[,] map = traverser.GetInputData(PuzzleFilePath);
             int noOfTrees = traverser.TreeCounter(map, down, right);
             Console.WriteLine(noOfTrees);
-            Assert.AreEqual(558, noOfTrees);
+            Assert.AreEqual(225, noOfTrees);
         }
     }
 }

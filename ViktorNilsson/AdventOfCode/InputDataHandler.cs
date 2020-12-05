@@ -9,7 +9,7 @@ namespace TestAdventOfCode
         public static string[] ReadFileAsArray(string FilePath)
         {
             string fileContent = File.ReadAllText(FilePath);
-            string[] fileRows = fileContent.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] fileRows = fileContent.Split(new string[] { "\r\n" }, StringSplitOptions.None);
             return fileRows;
         }
     }
