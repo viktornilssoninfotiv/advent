@@ -7,14 +7,17 @@ namespace TestAdventOfCode
 {
     public class TestExpenseReport
     {
+        private const string PuzzleFilePath = "../../../../AdventOfCode/InputData/DayOneInput.txt";
+
         [SetUp]
         public void Setup()
         {
         }
+
         [Test]
         public void TestGetInputData()
         {
-            List<int> numbers = ExpepenseReport.GetInputData();
+            List<int> numbers = ExpepenseReport.GetInputData(PuzzleFilePath);
             Assert.IsNotNull(numbers);
             Assert.Contains(1918, numbers);
         }
@@ -48,7 +51,7 @@ namespace TestAdventOfCode
             int desiredSum = 2020;
 
             // Find the answer to day 1 challange 1
-            var input = ExpepenseReport.GetInputData();
+            var input = ExpepenseReport.GetInputData(PuzzleFilePath);
             List<int> numbers = ExpepenseReport.FindSum(input, desiredSum);
             Assert.AreEqual(numbers.Sum(), desiredSum);
             int answer = numbers.Aggregate((x, y) => x * y);
@@ -61,7 +64,7 @@ namespace TestAdventOfCode
             int desiredSum = 2020;
 
             // Find the answer to day 1 challange 2
-            var input = ExpepenseReport.GetInputData();
+            var input = ExpepenseReport.GetInputData(PuzzleFilePath);
             List<int> numbers = ExpepenseReport.FindTrippleSum(input, desiredSum);
             Assert.AreEqual(numbers.Sum(), desiredSum);
             int answer = numbers.Aggregate((x, y) => x * y);

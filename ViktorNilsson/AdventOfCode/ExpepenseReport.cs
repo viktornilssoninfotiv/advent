@@ -25,12 +25,12 @@ namespace TestAdventOfCode
             return result;
         }
 
-        public static List<int> GetInputData()
+        public static List<int> GetInputData(string filePath)
         {
             var numbers = new List<int>();
 
             // Specify folder since it can be run from elsewhere, e.g. unittest
-            string[] stringNumbers = InputDataHandler.ReadFileAsArray("../../../../AdventOfCode/DayOneInput.txt");
+            string[] stringNumbers = InputDataHandler.ReadFileAsArray(filePath);
 
             foreach (string s in stringNumbers)
             {
