@@ -47,11 +47,11 @@ namespace TestAdventOfCode
             return PasswordPolicy.Check(this.minOccurence, this.maxOccurence, this.policyLetter, password);
         }
 
-        public static List<PasswordPolicy> GetInputData()
+        public static List<PasswordPolicy> GetInputData(string filePath)
         {
             var policies = new List<PasswordPolicy>();
             // Specify folder since it can be run from elsewhere, e.g. unittest
-            string[] policyPasswordList = InputDataHandler.ReadFileAsArray("../../../../AdventOfCode/DayTwoInput.txt");
+            string[] policyPasswordList = InputDataHandler.ReadFileAsArray(filePath);
 
             foreach (string unparsed in policyPasswordList)
             {

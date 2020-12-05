@@ -7,6 +7,7 @@ namespace TestAdventOfCode
 {
     public class TestPasswordPolicy
     {
+        private const string PuzzleFilePath = "../../../../AdventOfCode/InputData/DayTwoInput.txt";
 
         [SetUp]
         public void Setup()
@@ -49,7 +50,7 @@ namespace TestAdventOfCode
         [Test]
         public void TestGetInputData()
         {
-            List<PasswordPolicy> passwordList = PasswordPolicy.GetInputData();
+            List<PasswordPolicy> passwordList = PasswordPolicy.GetInputData(PuzzleFilePath);
             Assert.AreEqual(1000, passwordList.Count());
         }
 
@@ -66,7 +67,7 @@ namespace TestAdventOfCode
         [Test]
         public void FindAnswerDayTwoPuzzleOne()
         {
-            List<PasswordPolicy> passwordList = PasswordPolicy.GetInputData();
+            List<PasswordPolicy> passwordList = PasswordPolicy.GetInputData(PuzzleFilePath);
 
             int numberOfValidPasswords = PasswordPolicy.CountValidPasswords(passwordList);
             Console.WriteLine(numberOfValidPasswords);
@@ -88,7 +89,7 @@ namespace TestAdventOfCode
         [Test]
         public void FindAnswerDayTwoPuzzleTwo()
         {
-            List<PasswordPolicy> passwordList = PasswordPolicy.GetInputData();
+            List<PasswordPolicy> passwordList = PasswordPolicy.GetInputData(PuzzleFilePath);
 
             int numberOfValidPasswords = PasswordPolicy.CountValidPasswords2(passwordList);
             Console.WriteLine(numberOfValidPasswords);

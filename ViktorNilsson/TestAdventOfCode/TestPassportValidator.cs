@@ -3,11 +3,10 @@ using System;
 
 namespace TestAdventOfCode
 {
-    public class TestMapTraverser
+    public class TestPassPortValidator
     {
-        private const string PuzzleFilePath = "../../../../AdventOfCode/InputData/DayThreeInput.txt";
-        private const string TestDataFilePath = "../../../TestData/DayThreeTestData.txt";
-        private int[,] slopes = new int[,] { { 1, 1 }, { 3, 1 }, { 5, 1 }, { 7, 1 }, { 1, 2 } };
+        private const string PuzzleFilePath = "../../../../AdventOfCode/InputData/DayFourInput.txt";
+        private const string TestDataFilePath = "../../../TestData/DayFourTestData.txt";
 
         [SetUp]
         public void Setup()
@@ -47,27 +46,6 @@ namespace TestAdventOfCode
             int noOfTrees = traverser.TreeCounter(map, right, down);
             Console.WriteLine(noOfTrees);
             Assert.AreEqual(225, noOfTrees);
-        }
-
-        [Test]
-        public void TestTreeCounterMultiSlope()
-        {
-            MapTraverser traverser = new MapTraverser();
-            char[,] map = traverser.GetInputData(TestDataFilePath);
-            int noOfTrees = traverser.TreeCounterMultiSlope(map, this.slopes);
-            Assert.AreEqual(336, noOfTrees);
-        }
-
-        [Test]
-        public void SolveDayThreePuzzelTwo()
-        {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-            MapTraverser traverser = new MapTraverser();
-            char[,] map = traverser.GetInputData(PuzzleFilePath);
-            int noOfTrees = traverser.TreeCounterMultiSlope(map, this.slopes);
-            watch.Stop();
-            Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
-            Assert.AreEqual(1115775000, noOfTrees);
         }
     }
 }
