@@ -34,7 +34,7 @@ namespace TestAdventOfCode
             return map;
         }
 
-        public int TreeCounter(char[,] map, int down, int right)
+        public int TreeCounter(char[,] map, int right, int down)
         {
             int noOfTrees = 0;
             int col = 0;
@@ -59,6 +59,19 @@ namespace TestAdventOfCode
             }
 
             return noOfTrees;
+        }
+
+        public int TreeCounterMultiSlope(char[,] map, int[,] slopes)
+        {
+            int multipliedTrees = 1;
+            for (int slopeIdx = 0; slopeIdx < slopes.GetLength(0); slopeIdx++)
+            {
+                int right = slopes[slopeIdx, 0];
+                int down = slopes[slopeIdx, 1];
+                multipliedTrees *= this.TreeCounter(map, right, down);
+            }
+
+            return multipliedTrees;
         }
     }
 }
