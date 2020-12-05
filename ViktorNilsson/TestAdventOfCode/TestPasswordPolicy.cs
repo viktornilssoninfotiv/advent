@@ -92,6 +92,7 @@ namespace TestAdventOfCode
 
             int numberOfValidPasswords = PasswordPolicy.CountValidPasswords2(passwordList);
             Console.WriteLine(numberOfValidPasswords);
+            Assert.AreEqual(558, numberOfValidPasswords);
         }
     }
 }
