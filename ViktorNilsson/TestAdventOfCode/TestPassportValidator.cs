@@ -74,7 +74,7 @@ namespace TestAdventOfCode
         {
             string[] rawPassports = PassportValidator.GetInputData(FilePathTestDataStrict);
             int nuOfValidPassports = PassportValidator.CountValidPassportsStrict(rawPassports);
-            Assert.AreEqual(5, nuOfValidPassports);
+            Assert.AreEqual(4, nuOfValidPassports);
         }
 
         [TestCase(0, true)]
@@ -82,7 +82,7 @@ namespace TestAdventOfCode
         [TestCase(2, true)]
         [TestCase(3, true)]
         [TestCase(4, false)]
-        [TestCase(5, true, TestName = "Invalid but OK to slip because of cid")]
+        [TestCase(5, false)]
         [TestCase(6, false)]
         [TestCase(7, false)]
         public void TestValidatePassportStrict(int iTestDataPassport, bool expectedValid)
@@ -98,7 +98,7 @@ namespace TestAdventOfCode
         [TestCase(2, true)]
         [TestCase(3, true)]
         [TestCase(4, false)]
-        [TestCase(5, true, TestName = "Invalid accordingt Regex but OK to slip because of cid")]
+        [TestCase(5, false)]
         [TestCase(6, false)]
         [TestCase(7, false)]
         public void TestValidatePassportRegex(int iTestDataPassport, bool expectedValid)
@@ -107,6 +107,16 @@ namespace TestAdventOfCode
             Dictionary<string, string> parsedPassport = PassportValidator.ParseRawPassport(rawPassports[iTestDataPassport]);
             bool passportValid = PassportValidator.ValidatePassportRegex(parsedPassport);
             Assert.AreEqual(expectedValid, passportValid);
+        }
+
+        [Test]
+        public void FindAnserDayFourPuzzleTwo()
+        {
+            string[] rawPassports = PassportValidator.GetInputData(FilePathInputData);
+            int nuOfValidPassports = PassportValidator.CountValidPassportsStrict(rawPassports);
+            Console.WriteLine("Number of valid passports: " + nuOfValidPassports);
+            Assert.IsTrue(nuOfValidPassports < 176);
+            Assert.AreEqual(185, nuOfValidPassports);
         }
     }
 }

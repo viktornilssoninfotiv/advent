@@ -114,7 +114,7 @@ namespace TestAdventOfCode
                     if (!Regex.IsMatch(value, currentFieldTemplate.Value))
                     {
                         passportIsValid = false;
-                        Console.WriteLine("Passport invalidated by: " + currentFieldTemplate.Key + ":" + value);
+                        //Console.WriteLine("Passport invalidated by: " + currentFieldTemplate.Key + ":" + value);
                     }
                 }
                 else
