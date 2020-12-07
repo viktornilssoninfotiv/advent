@@ -46,6 +46,9 @@ namespace TestAdventOfCode
         public static List<string> GetBagOptions(Dictionary<string, string[]> ruleBook, string desiredBagColor)
         {
             List<string> possibleBagOptions = possibleBagOptions = new List<string>();
+            List<string> bagsToLookIn = new List<string>();
+            List<string> bagsToLookFor = new List<string>();
+
             //List<string> possibleBagOptions = ruleBook.Keys.ToList();
 
             // Want to carry the desired bag in at least one other bag
@@ -53,7 +56,9 @@ namespace TestAdventOfCode
 
             // Traverse the rule book to find the possible bags
             // Find all bags that can carry the desired color in 1 "step"
-            foreach (var potentialBag in ruleBook)
+            bagsToLookIn = ruleBook.Keys.ToList();
+            bagsToLookFor.Add(desiredBagColor);
+            foreach (var potentialBag in bagsToLookIn)
             {
                 /*
                 // If the bag cannot carry other bags it can be removed from potential bags
@@ -63,14 +68,13 @@ namespace TestAdventOfCode
                     continue;
                 }
                 */
-                if (potentialBag.Value.Contains(desiredBagColor))
+                // If the potential bag contains any of the bag we are looking for at the current level, store it
+                if (ruleBook[potentialBag].Any(bagsToLookFor.Contains))
                 {
-                    possibleBagOptions.Add(potentialBag.Key);
+                    possibleBagOptions.Add(potentialBag);
                 }
-
-
             }
-
+            //bagsToLookIn = possibleBagOptions;
 
             Console.WriteLine("Possible bag options: " + possibleBagOptions);
             return possibleBagOptions;
