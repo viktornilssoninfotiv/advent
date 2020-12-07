@@ -49,26 +49,12 @@ namespace TestAdventOfCode
             var bagsToLookIn = new List<string>();
             var bagsToLookFor = new HashSet<string>();
 
-            //List<string> possibleBagOptions = ruleBook.Keys.ToList();
-
-            // Want to carry the desired bag in at least one other bag
-            //possibleBagOptions.Remove(bagColor);
-
             // Traverse the rule book to find the possible bags
             bagsToLookIn = ruleBook.Keys.ToList();
             bagsToLookFor.Add(desiredBagColor);
 
             // Search for possible bag options until adding another level doesn't find any new bags,
             // i.e the HshSet has not increased in size
-            bagsToLookFor = FindPossibleBagOptions(ruleBook, bagsToLookIn, bagsToLookFor, possibleBagOptions);
-            //bagsToLookIn = possibleBagOptions;
-
-            Console.WriteLine("Possible bag options: " + possibleBagOptions);
-            return possibleBagOptions.ToList();
-        }
-
-        private static HashSet<string> FindPossibleBagOptions(Dictionary<string, string[]> ruleBook, List<string> bagsToLookIn, HashSet<string> bagsToLookFor, HashSet<string> possibleBagOptions)
-        {
             while (bagsToLookFor.Count > 0)
             {
                 var addedOptions = new HashSet<string>();
@@ -81,11 +67,12 @@ namespace TestAdventOfCode
                         addedOptions.Add(potentialBag);
                     }
                 }
+
                 // Now look in the next level for the bags we found here, to see if we can find new ones
                 bagsToLookFor = addedOptions;
-            } 
+            }
 
-            return possibleBagOptions;
+            return possibleBagOptions.ToList();
         }
     }
 }

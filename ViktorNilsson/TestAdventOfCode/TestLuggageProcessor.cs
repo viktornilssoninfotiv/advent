@@ -6,7 +6,7 @@ namespace TestAdventOfCode
 {
     public class TestLuggageProcessor
     {
-        private const string FilePathInputData = "../../../../AdventOfCode/InputData/DaySevenInput.txt";
+        private const string FilePathInputData = @"C:\Users\Viktor\source\repos\advent\ViktorNilsson\AdventOfCode\InputData\DaySevenInput.txt";
         private const string FilePathTestData = "../../../TestData/DaySevenTestData.txt";
 
         [SetUp]
@@ -91,16 +91,14 @@ namespace TestAdventOfCode
             Dictionary<string, string[]> ruleBook = LuggageProcessor.CreateRuleBook(rawData);
             int numberOfBagOptions = LuggageProcessor.CountBagOptions(ruleBook, "shiny gold");
             Console.WriteLine("Number of bag options: " + numberOfBagOptions);
-            Assert.AreEqual(6630, numberOfBagOptions);
+            Assert.AreEqual(224, numberOfBagOptions);
         }
 
         [Test]
         public void FindAnserDaySevenPuzzleTwo()
         {
-            string[] rawData = CustomsDeclarator.GetInputData(FilePathInputData);
-            int sumOfAnswers = CustomsDeclarator.SumConsensusAnswers(rawData);
-            Console.WriteLine("Number of valid passports: " + sumOfAnswers);
-            Assert.AreEqual(3437, sumOfAnswers);
+            string[] rawData = LuggageProcessor.GetInputData(FilePathInputData);
+            Dictionary<string, string[]> ruleBook = LuggageProcessor.CreateRuleBook(rawData);
         }
     }
 }
