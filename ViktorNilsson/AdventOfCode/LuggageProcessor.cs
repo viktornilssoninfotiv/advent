@@ -46,25 +46,20 @@ namespace TestAdventOfCode
         public static List<string> GetBagOptions(Dictionary<string, string[]> ruleBook, string desiredBagColor)
         {
             var possibleBagOptions = new HashSet<string>();
-            var bagsToLookIn = new List<string>();
             var bagsToLookFor = new HashSet<string>();
 
-            // Traverse the rule book to find the possible bags
-            bagsToLookIn = ruleBook.Keys.ToList();
-            bagsToLookFor.Add(desiredBagColor);
-
             // Search for possible bag options until adding another level doesn't find any new bags,
-            // i.e the HshSet has not increased in size
+            bagsToLookFor.Add(desiredBagColor);
             while (bagsToLookFor.Count > 0)
             {
                 var addedOptions = new HashSet<string>();
-                foreach (var potentialBag in bagsToLookIn)
+                foreach (var potentialBag in ruleBook)
                 {
                     // If the potential bag contains any of the bag we are looking for at the current level, store it
-                    if (ruleBook[potentialBag].Any(bagsToLookFor.Contains))
+                    if (potentialBag.Value.Any(bagsToLookFor.Contains))
                     {
-                        possibleBagOptions.Add(potentialBag);
-                        addedOptions.Add(potentialBag);
+                        possibleBagOptions.Add(potentialBag.Key);
+                        addedOptions.Add(potentialBag.Key);
                     }
                 }
 
