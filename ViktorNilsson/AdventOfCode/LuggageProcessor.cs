@@ -45,9 +45,9 @@ namespace TestAdventOfCode
 
         public static List<string> GetBagOptions(Dictionary<string, string[]> ruleBook, string desiredBagColor)
         {
-            List<string> possibleBagOptions = possibleBagOptions = new List<string>();
-            List<string> bagsToLookIn = new List<string>();
-            List<string> bagsToLookFor = new List<string>();
+            var possibleBagOptions = new HashSet<string>();
+            var bagsToLookIn = new List<string>();
+            var bagsToLookFor = new HashSet<string>();
 
             //List<string> possibleBagOptions = ruleBook.Keys.ToList();
 
@@ -55,28 +55,36 @@ namespace TestAdventOfCode
             //possibleBagOptions.Remove(bagColor);
 
             // Traverse the rule book to find the possible bags
-            // Find all bags that can carry the desired color in 1 "step"
             bagsToLookIn = ruleBook.Keys.ToList();
             bagsToLookFor.Add(desiredBagColor);
-            foreach (var potentialBag in bagsToLookIn)
-            {
-                /*
-                // If the bag cannot carry other bags it can be removed from potential bags
-                if (potentialBag.Value == null)
-                {
-                    possibleBagOptions.Remove(potentialBag.Key);
-                    continue;
-                }
-                */
-                // If the potential bag contains any of the bag we are looking for at the current level, store it
-                if (ruleBook[potentialBag].Any(bagsToLookFor.Contains))
-                {
-                    possibleBagOptions.Add(potentialBag);
-                }
-            }
+
+            // Search for possible bag options until adding another level doesn't find any new bags,
+            // i.e the HshSet has not increased in size
+            bagsToLookFor = FindPossibleBagOptions(ruleBook, bagsToLookIn, bagsToLookFor, possibleBagOptions);
             //bagsToLookIn = possibleBagOptions;
 
             Console.WriteLine("Possible bag options: " + possibleBagOptions);
+            return possibleBagOptions.ToList();
+        }
+
+        private static HashSet<string> FindPossibleBagOptions(Dictionary<string, string[]> ruleBook, List<string> bagsToLookIn, HashSet<string> bagsToLookFor, HashSet<string> possibleBagOptions)
+        {
+            while (bagsToLookFor.Count > 0)
+            {
+                var addedOptions = new HashSet<string>();
+                foreach (var potentialBag in bagsToLookIn)
+                {
+                    // If the potential bag contains any of the bag we are looking for at the current level, store it
+                    if (ruleBook[potentialBag].Any(bagsToLookFor.Contains))
+                    {
+                        possibleBagOptions.Add(potentialBag);
+                        addedOptions.Add(potentialBag);
+                    }
+                }
+                // Now look in the next level for the bags we found here, to see if we can find new ones
+                bagsToLookFor = addedOptions;
+            } 
+
             return possibleBagOptions;
         }
     }

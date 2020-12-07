@@ -47,7 +47,6 @@ namespace TestAdventOfCode
         [TestCase("shiny gold", "muted yellow")]
         [TestCase("shiny gold", "dark orange")]
         [TestCase("shiny gold", "light red")]
-        [TestCase("not existing", "")]
         public void TestGetBagOptionsContains(string bagColor, string expectedColor)
         {
             string[] rawData = LuggageProcessor.GetInputData(FilePathTestData);
@@ -56,13 +55,22 @@ namespace TestAdventOfCode
             Assert.Contains(expectedColor, bagOptions);
         }
 
-        [TestCase("shiny gold", new string[] { "bright white", "muted yellow", "dark orange", "light red" })]
-        [TestCase("not existing", 0)]
-        public void TestGetBagOptionsEquality(string bagColor, List<string> expectedColors)
+        [Test]
+        public void TestGetBagOptionsContains()
         {
             string[] rawData = LuggageProcessor.GetInputData(FilePathTestData);
             Dictionary<string, string[]> ruleBook = LuggageProcessor.CreateRuleBook(rawData);
-            List<string> bagOptions = LuggageProcessor.GetBagOptions(ruleBook, bagColor);
+            List<string> bagOptions = LuggageProcessor.GetBagOptions(ruleBook, "not existing");
+            Assert.IsEmpty(bagOptions);
+        }
+
+        [Test]
+        public void TestGetBagOptionsEquality()
+        {
+            var expectedColors = new List<string> { "bright white", "muted yellow", "dark orange", "light red" };
+            string[] rawData = LuggageProcessor.GetInputData(FilePathTestData);
+            Dictionary<string, string[]> ruleBook = LuggageProcessor.CreateRuleBook(rawData);
+            List<string> bagOptions = LuggageProcessor.GetBagOptions(ruleBook, "shiny gold");
             Assert.AreEqual(expectedColors, bagOptions);
         }
 
@@ -77,36 +85,17 @@ namespace TestAdventOfCode
         }
 
         [Test]
-        public void FindAnserDaySixPuzzleOne()
+        public void FindAnserDaySevenPuzzleOne()
         {
-            string[] rawData = CustomsDeclarator.GetInputData(FilePathInputData);
-            int sumOfAnswers = CustomsDeclarator.SumAnswers(rawData);
-            Console.WriteLine("Number of valid passports: " + sumOfAnswers);
-            Assert.AreEqual(6630, sumOfAnswers);
-        }
-
-        [TestCase(0, 3)]
-        [TestCase(1, 0)]
-        [TestCase(2, 1)]
-        [TestCase(3, 1)]
-        [TestCase(4, 1)]
-        public void TestCountConsensusAnswers(int iTestData, int expectedAnswers)
-        {
-            string[] rawData = CustomsDeclarator.GetInputData(FilePathTestData);
-            int positiveAnswers = CustomsDeclarator.CountConsensusAnswers(rawData[iTestData]);
-            Assert.AreEqual(expectedAnswers, positiveAnswers);
+            string[] rawData = LuggageProcessor.GetInputData(FilePathInputData);
+            Dictionary<string, string[]> ruleBook = LuggageProcessor.CreateRuleBook(rawData);
+            int numberOfBagOptions = LuggageProcessor.CountBagOptions(ruleBook, "shiny gold");
+            Console.WriteLine("Number of bag options: " + numberOfBagOptions);
+            Assert.AreEqual(6630, numberOfBagOptions);
         }
 
         [Test]
-        public void TestSumConsensusAnswers()
-        {
-            string[] rawData = CustomsDeclarator.GetInputData(FilePathTestData);
-            int sumOfAnswers = CustomsDeclarator.SumConsensusAnswers(rawData);
-            Assert.AreEqual(6, sumOfAnswers);
-        }
-
-        [Test]
-        public void FindAnserDaySixPuzzleTwo()
+        public void FindAnserDaySevenPuzzleTwo()
         {
             string[] rawData = CustomsDeclarator.GetInputData(FilePathInputData);
             int sumOfAnswers = CustomsDeclarator.SumConsensusAnswers(rawData);
