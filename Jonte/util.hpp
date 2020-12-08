@@ -1,9 +1,13 @@
 #include <iostream>
+#include <algorithm>
 #include <regex>
 #include <sstream>
 #include <fstream>
 #include <string>
 #include <vector>
+#include <chrono>
+
+namespace cs = std::chrono;
 
 namespace util {
 
@@ -71,12 +75,11 @@ bool contains(const Container& c, Pred p) {
 
 template<class Container, class Func>
 auto map(const Container& c, Func f) {
-    auto it = c.begin();
-    using T = decltype(f(*it));
+    using T = decltype(f(*c.begin()));
     
     std::vector<T> out;
     for (const auto& item : c) {
-        out.emplace_back(std::move(f(c)));
+        out.emplace_back(f(c));
     }
 
     return out;
