@@ -1,7 +1,7 @@
 from day8_data import data
 
 # create data structure
-code_lines = [(l[0:3], l[4:5] == '+', int(l[5:])) for l in data.split("\n")]
+code_lines = [(line[0:3], int(line[4:])) for line in data.split("\n")]
 
 
 # part 1
@@ -14,7 +14,7 @@ def program_runner(code, modified_line=None):
     while current_line not in visited_lines:
 
         visited_lines.append(current_line)
-        instruction, add, value = code[current_line]
+        instruction, argument = code[current_line]
 
         if modified_line == current_line:  # part 2
             instruction = "nop" if instruction == "jmp" else "jmp"
@@ -23,10 +23,10 @@ def program_runner(code, modified_line=None):
             current_line += 1
 
         elif instruction == "jmp":
-            current_line = current_line + value if add else current_line - value
+            current_line += argument
 
         else:
-            accumulator = accumulator + value if add else accumulator - value
+            accumulator += argument
             current_line += 1
 
         if current_line >= len(code):
