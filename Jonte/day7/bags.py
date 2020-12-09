@@ -38,6 +38,11 @@ def has_bag(container_bag, query_bag, tree_dict):
     # recursive call
     return any(has_bag(b, query_bag, tree_dict) for b in bag_names)
 
+
+# 
+import time
+t0 = time.time()
+
 # read data and inititialize tree
 lines = data.split('\n')
 bag_data = [l.split(' contain ') for l in lines]
@@ -52,3 +57,6 @@ def count_bags(query_bag, tree_dict):
     return sum([int(num) * (1 + count_bags(name, tree_dict)) for num, name in children])
 
 print(count_bags('shiny gold', tree))
+
+t1 = time.time()
+print("execution time {:0.2f} ms".format((t1 - t0) * 1000))
