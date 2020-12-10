@@ -99,6 +99,7 @@ namespace TestAdventOfCode
         {
             string[] rawData = LuggageProcessor.GetInputData(FilePathInputData);
             Dictionary<string, string[]> ruleBook = LuggageProcessor.CreateRuleBook(rawData);
+            Assert.AreEqual(true, false);
         }
     }
 }
