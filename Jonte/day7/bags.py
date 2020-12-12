@@ -48,8 +48,12 @@ lines = data.split('\n')
 bag_data = [l.split(' contain ') for l in lines]
 tree = build_tree(bag_data)
 
+t1 = time.time()
+
 # part 1
 print(sum([has_bag(bag, 'shiny gold', tree) for bag in tree]))
+
+t2 = time.time()
 
 # part 2
 def count_bags(query_bag, tree_dict):
@@ -58,5 +62,7 @@ def count_bags(query_bag, tree_dict):
 
 print(count_bags('shiny gold', tree))
 
-t1 = time.time()
-print("execution time {:0.2f} ms".format((t1 - t0) * 1000))
+t3 = time.time()
+print("execution time of building dict: {:0.2f} milliseconds".format((t1 - t0) * 1e3))
+print("execution time of finding container bags: {:0.2f} milliseconds".format((t2 - t1) * 1e3))
+print("execution time of counting bags: {:0.2f} microseconds".format((t3 - t2) * 1e6))
