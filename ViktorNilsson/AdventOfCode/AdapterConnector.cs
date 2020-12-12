@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text.RegularExpressions;
-
-namespace AdventOfCode
+﻿namespace AdventOfCode
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class AdapterConnector
     {
         public static List<int> GetInputData(string filePath)

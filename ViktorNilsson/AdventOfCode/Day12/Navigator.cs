@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text.RegularExpressions;
-
-namespace AdventOfCode
+﻿namespace AdventOfCode
 {
     public class Navigator : InputDataHandler
     {
@@ -20,7 +14,6 @@ namespace AdventOfCode
             int arg = int.Parse(instruction.Remove(0, 1));
 
             // Act based on instruction
-
 
             return (latitude, longitude, angle);
         }

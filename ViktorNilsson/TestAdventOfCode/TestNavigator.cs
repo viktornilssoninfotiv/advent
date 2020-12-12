@@ -1,9 +1,8 @@
 namespace AdventOfCode
 {
-    using System.Collections.Generic;
     using NUnit.Framework;
 
-    //[TestFixture(12)]
+    // [TestFixture(12)]
     public class TestNavigator
     {
         private const string DayPath = @"../../../../AdventOfCode/Day12/";
@@ -29,19 +28,17 @@ namespace AdventOfCode
         [TestCase("F10", 0, 0, -90, 10, 0, -90)]
         public void TestNavigate(string instruction, int initialLat, int initialLong, int initialAngle, int expectedLong, int expectedLat, int expectedAngle)
         {
-
-            var pos = Navigator.Navigate(instruction, initialLat, initialLong, initialAngle);
-            Assert.AreEqual(expectedLat, pos.latitude);
-            Assert.AreEqual(expectedLong, pos.longitude);
-            Assert.AreEqual(expectedAngle, pos.angle);
+            var (latitude, longitude, angle) = Navigator.Navigate(instruction, initialLat, initialLong, initialAngle);
+            Assert.AreEqual(expectedLat, latitude);
+            Assert.AreEqual(expectedLong, longitude);
+            Assert.AreEqual(expectedAngle, angle);
         }
-
 
         [Test]
         public void FindAnswerDayElevenPuzzleOne()
         {
-            //var seats = Navigator.Simulate(this.inputData);
-            //Assert.AreEqual(2334, 1);
+            // var seats = Navigator.Simulate(this.inputData);
+            // Assert.AreEqual(2334, 1);
             Assert.Warn("Not solved");
         }
 
@@ -49,8 +46,6 @@ namespace AdventOfCode
         public void FindAnswerDayElevenPuzzleTwo()
         {
             Assert.Warn("Not solved");
-
-
         }
     }
 }

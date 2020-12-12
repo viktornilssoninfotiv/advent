@@ -4,24 +4,24 @@
 
     public class TestCore : InputDataHandler
     {
-        private string DayPath;
-        private string FilePathInputData;
-        private string FilePathTestData;
-        public char[,] testData;
-        public char[,] inputData;
+        private char[,] testData;
+        private char[,] inputData;
+        private string dayPath;
+        private string filePathInputData;
+        private string filePathTestData;
 
         public TestCore(int day)
         {
-            this.DayPath = @"../../../../AdventOfCode/Day" + day + "/";
-            this.FilePathInputData = this.DayPath + "InputData.txt";
-            this.FilePathTestData = this.DayPath + "TestData.txt";
+            this.dayPath = @"../../../../AdventOfCode/Day" + day + "/";
+            this.filePathInputData = this.dayPath + "InputData.txt";
+            this.filePathTestData = this.dayPath + "TestData.txt";
         }
 
         [SetUp]
         public void Setup()
         {
-            this.testData = this.GetInputDataMap(this.FilePathTestData);
-            this.inputData = this.GetInputDataMap(this.FilePathInputData);
+            this.testData = this.GetInputDataMap(this.filePathTestData);
+            this.inputData = this.GetInputDataMap(this.filePathInputData);
         }
     }
 }

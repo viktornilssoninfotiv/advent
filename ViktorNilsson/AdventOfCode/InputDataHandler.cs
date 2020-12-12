@@ -1,19 +1,17 @@
-﻿using System;
-using System.IO;
-using System.Text.RegularExpressions;
-
-namespace AdventOfCode
+﻿namespace AdventOfCode
 {
+    using System;
+    using System.IO;
+
     public class InputDataHandler
     {
         public int colIdxMax;
         public int rowIdxMax;
 
-
-
         public static string[] ReadFileAsArray(string FilePath, string dataSplit = "\r\n")
         {
             string fileContent = File.ReadAllText(FilePath);
+
             // string[] fileRows = Regex.Split(fileContent, @"\s+");
             string[] fileRows = fileContent.Split(new string[] { dataSplit }, StringSplitOptions.None);
             return fileRows;

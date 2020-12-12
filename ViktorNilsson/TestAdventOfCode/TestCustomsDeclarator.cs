@@ -1,9 +1,8 @@
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-
 namespace AdventOfCode
 {
+    using System;
+    using NUnit.Framework;
+
     public class TestCustomsDeclarator
     {
         private const string FilePathInputData = "../../../../AdventOfCode/InputData/DaySixInput.txt";
@@ -19,8 +18,9 @@ namespace AdventOfCode
         {
             string[] groupAnswers = CustomsDeclarator.GetInputData(FilePathTestData);
             Assert.AreEqual(5, groupAnswers.GetLength(0));
-            //Assert.AreEqual("abc", groupAnswers[0]);
-            //Assert.AreEqual("abc", groupAnswers[1]);
+
+            // Assert.AreEqual("abc", groupAnswers[0]);
+            // Assert.AreEqual("abc", groupAnswers[1]);
         }
 
         [TestCase(0, 3)]

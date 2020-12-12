@@ -1,9 +1,8 @@
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-
 namespace AdventOfCode
 {
+    using System.Collections.Generic;
+    using NUnit.Framework;
+
     public class TestBootExecutor
     {
         private const string Day = "Eight";
@@ -66,9 +65,9 @@ namespace AdventOfCode
             List<BootExecutor> instructionList = BootExecutor.CreateInstructionList(testData);
             int accumulator = BootExecutor.RunBoot(instructionList);
             Assert.Warn("Not solved");
-            //Assert.Less(accumulator, 1752);
-            //Assert.AreEqual(1797, accumulator);
 
+            // Assert.Less(accumulator, 1752);
+            // Assert.AreEqual(1797, accumulator);
         }
     }
 }

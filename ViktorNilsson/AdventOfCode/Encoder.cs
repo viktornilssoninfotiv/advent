@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text.RegularExpressions;
-
-namespace AdventOfCode
+﻿namespace AdventOfCode
 {
+    using System.Collections.Generic;
+
     public class Encoder
     {
         public static List<long> GetInputData(string filePath)
@@ -46,7 +42,7 @@ namespace AdventOfCode
 
             for (int i = 0; i < numbers.Count; i++)
             {
-                for (int j = numbers.Count - 1; j > i ; j--)
+                for (int j = numbers.Count - 1; j > i; j--)
                 {
                     sums.Add(numbers[i] + numbers[j]);
                 }
@@ -75,7 +71,8 @@ namespace AdventOfCode
 
             for (j = 0; j < data.Count; j++)
             {
-                var sums = FindSums(data.GetRange(j, i-j));
+                var sums = FindSums(data.GetRange(j, i - j));
+
                 // When the sum to find is no longer present the lower index has been found
                 if (!sums.Contains(sumToFind))
                 {

@@ -1,9 +1,9 @@
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-
 namespace AdventOfCode
 {
+    using System;
+    using System.Collections.Generic;
+    using NUnit.Framework;
+
     public class TestPassportValidator
     {
         private const string FilePathInputData = "../../../../AdventOfCode/InputData/DayFourInput.txt";
@@ -55,7 +55,7 @@ namespace AdventOfCode
         [Test]
         public void TestCountValidPassportsEmpty()
         {
-            string[] rawPassports = new string[] {"xx:yy"};
+            string[] rawPassports = new string[] { "xx:yy" };
             int nuOfValidPassports = PassportValidator.CountValidPassports(rawPassports);
             Assert.AreEqual(0, nuOfValidPassports);
         }
@@ -115,8 +115,9 @@ namespace AdventOfCode
             string[] rawPassports = PassportValidator.GetInputData(FilePathInputData);
             int nuOfValidPassports = PassportValidator.CountValidPassportsStrict(rawPassports);
             Console.WriteLine("Number of valid passports: " + nuOfValidPassports);
-            //Assert.IsTrue(nuOfValidPassports < 176);
-            //Assert.AreEqual(185, nuOfValidPassports);
+
+            // Assert.IsTrue(nuOfValidPassports < 176);
+            // Assert.AreEqual(185, nuOfValidPassports);
             Assert.Warn("Not solved");
         }
     }

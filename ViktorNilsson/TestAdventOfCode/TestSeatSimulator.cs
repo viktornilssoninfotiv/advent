@@ -1,9 +1,8 @@
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-
 namespace AdventOfCode
 {
+    using System.Collections.Generic;
+    using NUnit.Framework;
+
     public class TestSeatSimulator
     {
         private const string DayPath = @"../../../../AdventOfCode/Day11/";
@@ -36,7 +35,6 @@ namespace AdventOfCode
             Assert.AreEqual(4, seats.Count);
             Assert.AreEqual(expectedSeats, seats);
         }
-
 
         [Test]
         public void TestCountSeats()
@@ -78,8 +76,6 @@ namespace AdventOfCode
         public void FindAnswerDayElevenPuzzleTwo()
         {
             Assert.Warn("Not solved");
-
-
         }
     }
 }

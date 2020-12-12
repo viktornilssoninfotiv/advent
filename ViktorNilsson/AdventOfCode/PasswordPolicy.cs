@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace AdventOfCode
+﻿namespace AdventOfCode
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class PasswordPolicy
     {
         private string policyRaw;
@@ -17,13 +17,14 @@ namespace AdventOfCode
             string[] splitPolicy = policyRaw.Split();
 
             string[] occurencePolicy = splitPolicy[0].Split('-');
-            this.minOccurence = Int32.Parse(occurencePolicy[0]);
+            this.minOccurence = int.Parse(occurencePolicy[0]);
             this.maxOccurence = Int32.Parse(occurencePolicy[1]);
 
             this.policyLetter = char.Parse(splitPolicy[1]);
         }
 
-        public PasswordPolicy(string policyRaw, string password) : this(policyRaw)
+        public PasswordPolicy(string policyRaw, string password)
+            : this(policyRaw)
         {
             this.password = password;
         }
@@ -50,6 +51,7 @@ namespace AdventOfCode
         public static List<PasswordPolicy> GetInputData(string filePath)
         {
             var policies = new List<PasswordPolicy>();
+
             // Specify folder since it can be run from elsewhere, e.g. unittest
             string[] policyPasswordList = InputDataHandler.ReadFileAsArray(filePath);
 

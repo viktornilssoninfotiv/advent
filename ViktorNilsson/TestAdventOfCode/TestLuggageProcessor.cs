@@ -1,9 +1,9 @@
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-
 namespace AdventOfCode
 {
+    using System;
+    using System.Collections.Generic;
+    using NUnit.Framework;
+
     public class TestLuggageProcessor
     {
         private const string FilePathInputData = @"C:\Users\Viktor\source\repos\advent\ViktorNilsson\AdventOfCode\InputData\DaySevenInput.txt";
@@ -72,7 +72,8 @@ namespace AdventOfCode
             Dictionary<string, string[]> ruleBook = LuggageProcessor.CreateRuleBook(rawData);
             List<string> bagOptions = LuggageProcessor.GetBagOptions(ruleBook, "shiny gold");
             Assert.Warn("Not solved");
-            //Assert.AreEqual(expectedColors, bagOptions);
+
+            // Assert.AreEqual(expectedColors, bagOptions);
         }
 
         [TestCase("shiny gold", 4)]

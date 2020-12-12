@@ -1,9 +1,8 @@
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-
 namespace AdventOfCode
 {
+    using System.Collections.Generic;
+    using NUnit.Framework;
+
     public class TestEncoder
     {
         private const string Day = "Nine";
@@ -39,7 +38,6 @@ namespace AdventOfCode
         [Test]
         public void TestFindSums()
         {
-            int preambleLength = 5;
             List<long> sum = Encoder.FindSums(new List<long> { 1, 2, 3 });
             Assert.AreEqual(3, sum.Count);
             Assert.AreEqual(new List<int> { 3, 4, 5 }, sum);
@@ -60,8 +58,9 @@ namespace AdventOfCode
             long sumToFind = 127;
             List<long> set = Encoder.FindSumSet(this.testData, sumToFind);
             Assert.Warn("Not solved");
+
             // Assert.AreEqual(4, set.Count);
-            //Assert.AreEqual(new List<long> { 15, 25, 40, 47 }, set);
+            // Assert.AreEqual(new List<long> { 15, 25, 40, 47 }, set);
         }
 
         [Test]
@@ -77,7 +76,6 @@ namespace AdventOfCode
             Console.WriteLine("Weakness sum: " );
             */
             Assert.Warn("Not solved");
-
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace AdventOfCode
+﻿namespace AdventOfCode
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class ExpepenseReport : InputDataHandler
     {
         public static List<int> FindSum(List<int> numbers, int sum)

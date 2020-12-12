@@ -1,9 +1,8 @@
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-
 namespace AdventOfCode
 {
+    using System.Collections.Generic;
+    using NUnit.Framework;
+
     public class TestAdapterConnector
     {
         private const string Day = "Ten";
@@ -49,9 +48,6 @@ namespace AdventOfCode
         [Test]
         public void FindAnswerDayNinePuzzleTwo()
         {
-
-
-
         }
     }
 }

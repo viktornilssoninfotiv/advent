@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text.RegularExpressions;
-
-namespace AdventOfCode
+﻿namespace AdventOfCode
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class SeatSimulator : InputDataHandler
     {
         private const char Free = 'L';
@@ -101,6 +99,7 @@ namespace AdventOfCode
                 {
                     int iRow = row + i;
                     int iCol = col + j;
+
                     // Only check an adjacent seat if inside the map bounds
                     if (iRow >= 0 && iRow < seatMap.GetLength(0) && iCol >= 0 && iCol < seatMap.GetLength(1))
                     {

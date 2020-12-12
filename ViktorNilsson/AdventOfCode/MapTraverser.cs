@@ -1,11 +1,8 @@
-﻿using System;
-
-namespace AdventOfCode
+﻿namespace AdventOfCode
 {
     public class MapTraverser : InputDataHandler
     {
         private const char TreeChar = '#';
-        
 
         public MapTraverser()
         {
