@@ -15,7 +15,6 @@ namespace AdventOfCode
         [SetUp]
         public void Setup()
         {
-            //var classUnderTest = new Navigator();
             this.testData = Navigator.ReadFileAsArray(FilePathTestData);
             this.inputData = Navigator.ReadFileAsArray(FilePathInputData);
         }
@@ -24,8 +23,17 @@ namespace AdventOfCode
         public void TestGetInputData()
         {
             var localTestData = this.testData;
-            Assert.AreEqual(10, localTestData.GetLength(0));
-            Assert.AreEqual(10, localTestData.GetLength(0));
+            Assert.AreEqual(5, localTestData.GetLength(0));
+        }
+
+        [TestCase("F10", 0, 0, -90, 10, 0, -90)]
+        public void TestNavigate(string instruction, int initialLat, int initialLong, int initialAngle, int expectedLong, int expectedLat, int expectedAngle)
+        {
+
+            var pos = Navigator.Navigate(instruction, initialLat, initialLong, initialAngle);
+            Assert.AreEqual(expectedLat, pos.latitude);
+            Assert.AreEqual(expectedLong, pos.longitude);
+            Assert.AreEqual(expectedAngle, pos.angle);
         }
 
 
