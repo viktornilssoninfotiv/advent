@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TestAdventOfCode
+namespace AdventOfCode
 {
     public class ExpepenseReport : InputDataHandler
     {

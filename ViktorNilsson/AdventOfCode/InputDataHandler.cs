@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace TestAdventOfCode
+namespace AdventOfCode
 {
     public class InputDataHandler
     {

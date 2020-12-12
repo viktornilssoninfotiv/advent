@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using System;
 
-namespace TestAdventOfCode
+namespace AdventOfCode
 {
     public class TestMapTraverser
     {

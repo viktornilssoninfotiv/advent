@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TestAdventOfCode
+namespace AdventOfCode
 {
     public class TestExpenseReport
     {
