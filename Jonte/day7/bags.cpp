@@ -22,8 +22,6 @@ dict build_tree(const vector<string>& lines) {
     auto s0 = line.substr(0, n);
     auto s1 = line.substr(n + delimiter.size());
 
-    auto m0 = util::re_search(parent_regex, s0);
-
     const auto child_strings = util::split(s1, ',');
     child_list children;
     for (const auto& cs : child_strings) {
@@ -33,14 +31,19 @@ dict build_tree(const vector<string>& lines) {
       }
     }
 
+    auto m0 = util::re_search(parent_regex, s0);
     d[m0[1]] = children;
   }
 
   return d;
 }
 
+size_t has_bag_counter = 0;
+
 bool has_bag(const string& container_bag, const string& query_bag,
              const dict& tree_dict) {
+  ++has_bag_counter;
+  
   if (tree_dict.count(container_bag) == 0) {
     return false;
   }
@@ -76,8 +79,9 @@ int main() {
 
   const auto data = util::read_text_file("data.txt");
   const auto lines = util::split(data, '\n');
-
   const auto tree = build_tree(lines);
+
+  auto t1 = cs::high_resolution_clock::now();
 
   // part 1
   int count = 0;
@@ -86,12 +90,20 @@ int main() {
       ++count;
     }
   }
-  std::cout << count << std::endl;
+
+  std::cout << count << "\n";
+  std::cout << "has_bag called " << has_bag_counter << " times\n";
+  auto t2 = cs::high_resolution_clock::now();
 
   // part 2
-  std::cout << count_bags("shiny gold", tree) << std::endl;
+  std::cout << count_bags("shiny gold", tree) << "\n";
 
-  auto t1 = cs::high_resolution_clock::now();
-  std::cout << "execution time: "
+  auto t3 = cs::high_resolution_clock::now();
+
+  std::cout << "execution time of building dict: "
             << cs::duration_cast<cs::milliseconds>(t1 - t0).count() << " ms\n";
+  std::cout << "execution time of finding container bags: "
+            << cs::duration_cast<cs::milliseconds>(t2 - t1).count() << " ms\n";
+  std::cout << "execution time of counting bags: "
+            << cs::duration_cast<cs::milliseconds>(t3 - t2).count() << " ms\n";
 }
