@@ -1,12 +1,12 @@
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-
 namespace AdventOfCode
 {
+    using System.Collections.Generic;
+    using NUnit.Framework;
+
+    //[TestFixture(12)]
     public class TestNavigator
     {
-        private const string DayPath = @"../../../../AdventOfCode/Day11/";
+        private const string DayPath = @"../../../../AdventOfCode/Day12/";
         private const string FilePathInputData = DayPath + "InputData.txt";
         private const string FilePathTestData = DayPath + "TestData.txt";
         private char[,] testData;
@@ -15,7 +15,7 @@ namespace AdventOfCode
         [SetUp]
         public void Setup()
         {
-            var seatSim = new Navigator();
+            var seatSim = new SeatSimulator();
             this.testData = seatSim.GetInputData(FilePathTestData);
             this.inputData = seatSim.GetInputData(FilePathInputData);
         }
