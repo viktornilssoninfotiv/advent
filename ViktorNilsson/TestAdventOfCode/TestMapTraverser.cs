@@ -18,7 +18,7 @@ namespace AdventOfCode
         public void TestGetInputData()
         {
             MapTraverser traverser = new MapTraverser();
-            char[,] map = traverser.GetInputData(PuzzleFilePath);
+            char[,] map = traverser.GetInputDataMap(PuzzleFilePath);
             Assert.AreEqual(323, map.GetLength(0));
             Assert.AreEqual(31, map.GetLength(1));
             Assert.AreEqual('.', map[0, 0]);
@@ -32,7 +32,7 @@ namespace AdventOfCode
         public void TestTreeCounter(int right, int down, int expectedTrees)
         {
             MapTraverser traverser = new MapTraverser();
-            char[,] map = traverser.GetInputData(TestDataFilePath);
+            char[,] map = traverser.GetInputDataMap(TestDataFilePath);
             int noOfTrees = traverser.TreeCounter(map, right, down);
             Assert.AreEqual(expectedTrees, noOfTrees);
         }
@@ -43,7 +43,7 @@ namespace AdventOfCode
             MapTraverser traverser = new MapTraverser();
             int down = 1;
             int right = 3;
-            char[,] map = traverser.GetInputData(PuzzleFilePath);
+            char[,] map = traverser.GetInputDataMap(PuzzleFilePath);
             int noOfTrees = traverser.TreeCounter(map, right, down);
             Console.WriteLine(noOfTrees);
             Assert.AreEqual(225, noOfTrees);
@@ -53,7 +53,7 @@ namespace AdventOfCode
         public void TestTreeCounterMultiSlope()
         {
             MapTraverser traverser = new MapTraverser();
-            char[,] map = traverser.GetInputData(TestDataFilePath);
+            char[,] map = traverser.GetInputDataMap(TestDataFilePath);
             int noOfTrees = traverser.TreeCounterMultiSlope(map, this.slopes);
             Assert.AreEqual(336, noOfTrees);
         }
@@ -63,7 +63,7 @@ namespace AdventOfCode
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
             MapTraverser traverser = new MapTraverser();
-            char[,] map = traverser.GetInputData(PuzzleFilePath);
+            char[,] map = traverser.GetInputDataMap(PuzzleFilePath);
             int noOfTrees = traverser.TreeCounterMultiSlope(map, this.slopes);
             watch.Stop();
             Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");

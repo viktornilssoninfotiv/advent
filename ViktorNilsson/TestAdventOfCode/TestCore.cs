@@ -20,8 +20,8 @@
         [SetUp]
         public void Setup()
         {
-            this.testData = this.GetInputData(this.FilePathTestData);
-            this.inputData = this.GetInputData(this.FilePathInputData);
+            this.testData = this.GetInputDataMap(this.FilePathTestData);
+            this.inputData = this.GetInputDataMap(this.FilePathInputData);
         }
     }
 }

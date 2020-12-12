@@ -9,6 +9,8 @@ namespace AdventOfCode
         public int colIdxMax;
         public int rowIdxMax;
 
+
+
         public static string[] ReadFileAsArray(string FilePath, string dataSplit = "\r\n")
         {
             string fileContent = File.ReadAllText(FilePath);
@@ -17,7 +19,7 @@ namespace AdventOfCode
             return fileRows;
         }
 
-        public char[,] GetInputData(string filePath)
+        public char[,] GetInputDataMap(string filePath)
         {
             // Specify folder since it can be run from elsewhere, e.g. unittest
             string[] stringMap = InputDataHandler.ReadFileAsArray(filePath);
