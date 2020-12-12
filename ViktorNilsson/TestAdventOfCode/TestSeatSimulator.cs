@@ -6,10 +6,9 @@ namespace AdventOfCode
 {
     public class TestSeatSimulator
     {
-        private const string Day = "Eleven";
-        private const string FilePathInputData = "../../../../AdventOfCode/InputData/Day" + Day + "Input.txt";
-        private const string FilePathInputData2 = "../../../../AdventOfCode/InputData/Day" + Day + "Input2.txt";
-        private const string FilePathTestData = "../../../TestData/Day" + Day + "TestData.txt";
+        private const string DayPath = @"../../../../AdventOfCode/Day11/";
+        private const string FilePathInputData = DayPath + "InputData.txt";
+        private const string FilePathTestData = DayPath + "TestData.txt";
         private char[,] testData;
         private char[,] inputData;
 
