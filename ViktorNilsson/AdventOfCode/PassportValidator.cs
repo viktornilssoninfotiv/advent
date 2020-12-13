@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-
-namespace TestAdventOfCode
+﻿namespace AdventOfCode
 {
+    using System.Collections.Generic;
+    using System.Text.RegularExpressions;
+
     public class PassportValidator
     {
         private const string FilePathPassportRulesRegex = "../../../../AdventOfCode/InputData/PassportRulesRegex.txt";
         private static List<string> passportValidKeys = new List<string> { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid" };
-        //private static Dictionary<string, string> passportRules = new Dictionary<string, string> {
-            //{ "byr", "" }, {"iyr" }, {"eyr" }, {"hgt" }, {"hcl" }, {"ecl" }, {"pid" }, {"cid" } };
+
+        // private static Dictionary<string, string> passportRules = new Dictionary<string, string> {
+        // { "byr", "" }, {"iyr" }, {"eyr" }, {"hgt" }, {"hcl" }, {"ecl" }, {"pid" }, {"cid" } };
         public static string[] GetInputData(string filePath)
         {
             string[] rawPassports = InputDataHandler.ReadFileAsArray(filePath, "\r\n\r\n");
@@ -31,7 +31,7 @@ namespace TestAdventOfCode
 
         public static bool ValidatePassport(Dictionary<string, string> parsedPassport)
         {
-            //bool isEqual = Enumerable.SequenceEqual(parsedPassport.Keys.OrderBy(e => e), y.OrderBy(e => e));
+            // bool isEqual = Enumerable.SequenceEqual(parsedPassport.Keys.OrderBy(e => e), y.OrderBy(e => e));
 
             bool passportIsValid;
 
@@ -114,7 +114,8 @@ namespace TestAdventOfCode
                     if (!Regex.IsMatch(value, currentFieldTemplate.Value))
                     {
                         passportIsValid = false;
-                        //Console.WriteLine("Passport invalidated by: " + currentFieldTemplate.Key + ":" + value);
+
+                        // Console.WriteLine("Passport invalidated by: " + currentFieldTemplate.Key + ":" + value);
                     }
                 }
                 else
@@ -125,7 +126,6 @@ namespace TestAdventOfCode
                     passportIsValid = false;
                 }
             }
-
 
             return passportIsValid;
         }

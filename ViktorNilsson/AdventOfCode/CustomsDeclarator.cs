@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-
-namespace TestAdventOfCode
+﻿namespace AdventOfCode
 {
+    using System;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+
     public class CustomsDeclarator
     {
 

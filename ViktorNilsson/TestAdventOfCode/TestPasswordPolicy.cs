@@ -1,10 +1,10 @@
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace TestAdventOfCode
+namespace AdventOfCode
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using NUnit.Framework;
+
     public class TestPasswordPolicy
     {
         private const string PuzzleFilePath = "../../../../AdventOfCode/InputData/DayTwoInput.txt";

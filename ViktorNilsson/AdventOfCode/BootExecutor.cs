@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text.RegularExpressions;
-
-namespace TestAdventOfCode
+﻿namespace AdventOfCode
 {
+    using System.Collections.Generic;
+
     public class BootExecutor
     {
         public string instruction;
@@ -15,9 +11,10 @@ namespace TestAdventOfCode
         public BootExecutor(string instructionRaw)
         {
             this.instruction = instructionRaw.Split(' ')[0];
-            this.argument = Int32.Parse(instructionRaw.Split(' ')[1]);
+            this.argument = int.Parse(instructionRaw.Split(' ')[1]);
             this.visits = 0;
         }
+
         public static string[] GetInputData(string filePath)
         {
             string[] groupAnswers = InputDataHandler.ReadFileAsArray(filePath);
@@ -60,7 +57,6 @@ namespace TestAdventOfCode
                         instructionRow += currentInstruction.argument;
                         break;
                 }
-
             } while (instructionRow <= instructionList.Count && instructionList[instructionRow].visits == 0);
 
             return accumulator;

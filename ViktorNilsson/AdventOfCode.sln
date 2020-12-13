@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode", "AdventOfCode\AdventOfCode.csproj", "{F014FB39-714A-41CA-BCEB-CD638942FCA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode", "AdventOfCode\AdventOfCode.csproj", "{F014FB39-714A-41CA-BCEB-CD638942FCA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAdventOfCode", "TestAdventOfCode\TestAdventOfCode.csproj", "{34C8AF7A-EC41-4534-9851-65A94B22FB4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestAdventOfCode", "TestAdventOfCode\TestAdventOfCode.csproj", "{34C8AF7A-EC41-4534-9851-65A94B22FB4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1B422597-D3B4-415B-B8C0-2DD94E78D94D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

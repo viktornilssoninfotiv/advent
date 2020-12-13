@@ -1,37 +1,11 @@
-﻿using System;
-
-namespace TestAdventOfCode
+﻿namespace AdventOfCode
 {
     public class MapTraverser : InputDataHandler
     {
         private const char TreeChar = '#';
-        private int colIdxMax;
-        private int rowIdxMax;
 
         public MapTraverser()
         {
-        }
-
-        public char[,] GetInputData(string filePath)
-        {
-            // Specify folder since it can be run from elsewhere, e.g. unittest
-            string[] stringMap = InputDataHandler.ReadFileAsArray(filePath);
-            int rows = stringMap.Length;
-            int columns = stringMap[0].Length;
-            char[,] map = new char[rows, columns];
-
-            this.colIdxMax = columns;
-            this.rowIdxMax = rows;
-
-            for (int row = 0; row < rows; row++)
-            {
-                for (int col = 0; col < columns; col++)
-                {
-                    map[row, col] = stringMap[row][col];
-                }
-            }
-
-            return map;
         }
 
         public int TreeCounter(char[,] map, int right, int down)
