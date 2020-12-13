@@ -79,6 +79,7 @@
                     break;
                 }
             }
+
             int startIdx = j - 1;
             sumSet = data.GetRange(startIdx, i - startIdx);
 

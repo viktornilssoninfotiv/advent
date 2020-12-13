@@ -15,7 +15,7 @@
             int row = 0;
 
             // Traverse until the bottom of the map
-            while (row < this.rowIdxMax)
+            while (row < this.RowIdxMax)
             {
                 if (map[row, col] == MapTraverser.TreeChar)
                 {
@@ -26,9 +26,9 @@
                 col += right;
 
                 // Map shall be repeated to the right
-                if (col >= this.colIdxMax)
+                if (col >= this.ColIdxMax)
                 {
-                    col -= this.colIdxMax;
+                    col -= this.ColIdxMax;
                 }
             }
 

@@ -7,7 +7,6 @@
     {
         public static Quaternion Navigate(string instruction, Quaternion initialPos)
         {
-
             // Extract command and argument
             char cmd = instruction[0];
             int arg = int.Parse(instruction.Remove(0, 1));

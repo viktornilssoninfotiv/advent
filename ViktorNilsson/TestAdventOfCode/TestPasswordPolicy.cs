@@ -32,9 +32,9 @@ namespace AdventOfCode
             string policyRaw = "2-6 w";
             PasswordPolicy policy = new PasswordPolicy(policyRaw);
 
-            Assert.AreEqual(2, policy.minOccurence);
-            Assert.AreEqual(6, policy.maxOccurence);
-            Assert.AreEqual('w', policy.policyLetter);
+            Assert.AreEqual(2, policy.MinOccurence);
+            Assert.AreEqual(6, policy.MaxOccurence);
+            Assert.AreEqual('w', policy.PolicyLetter);
         }
 
         [TestCase("2-6 w", "ss", false)]

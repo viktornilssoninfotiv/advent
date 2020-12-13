@@ -6,9 +6,9 @@
     {
         private char[,] testData;
         private char[,] inputData;
-        private string dayPath;
-        private string filePathInputData;
-        private string filePathTestData;
+        private readonly string dayPath;
+        private readonly string filePathInputData;
+        private readonly string filePathTestData;
 
         public TestCore(int day)
         {

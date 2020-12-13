@@ -1,9 +1,8 @@
 namespace AdventOfCode
 {
-    using NUnit.Framework;
     using System.Numerics;
+    using NUnit.Framework;
 
-    // [TestFixture(12)]
     public class TestNavigator
     {
         private const string DayPath = @"../../../../AdventOfCode/Day12/";

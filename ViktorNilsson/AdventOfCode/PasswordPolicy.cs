@@ -6,10 +6,11 @@
 
     public class PasswordPolicy
     {
-        private string policyRaw;
-        public int minOccurence, maxOccurence;
-        public char policyLetter;
-        private string password;
+        private readonly string policyRaw;
+        private readonly string password;
+        public int MinOccurence;
+        public int MaxOccurence;
+        public char PolicyLetter;
 
         public PasswordPolicy(string policyRaw)
         {
@@ -17,10 +18,10 @@
             string[] splitPolicy = policyRaw.Split();
 
             string[] occurencePolicy = splitPolicy[0].Split('-');
-            this.minOccurence = int.Parse(occurencePolicy[0]);
-            this.maxOccurence = Int32.Parse(occurencePolicy[1]);
+            this.MinOccurence = int.Parse(occurencePolicy[0]);
+            this.MaxOccurence = int.Parse(occurencePolicy[1]);
 
-            this.policyLetter = char.Parse(splitPolicy[1]);
+            this.PolicyLetter = char.Parse(splitPolicy[1]);
         }
 
         public PasswordPolicy(string policyRaw, string password)
@@ -43,11 +44,6 @@
             }
         }
 
-        public bool Check(string password)
-        {
-            return PasswordPolicy.Check(this.minOccurence, this.maxOccurence, this.policyLetter, password);
-        }
-
         public static List<PasswordPolicy> GetInputData(string filePath)
         {
             var policies = new List<PasswordPolicy>();
@@ -60,6 +56,7 @@
                 string[] policyAndPassword = unparsed.Split(new string[] { ": " }, StringSplitOptions.None);
                 policies.Add(new PasswordPolicy(policyAndPassword[0], policyAndPassword[1]));
             }
+
             return policies;
         }
 
@@ -73,25 +70,8 @@
                     numberOfValidPasswords++;
                 }
             }
+
             return numberOfValidPasswords;
-        }
-
-        public bool Check2(string password)
-        {
-            // Reinterpret the password policy
-            // Decrement by 1 to convert from positiion to zero-indexed
-            int indexA = this.minOccurence - 1;
-            int indexB = this.maxOccurence - 1;
-
-            // Exclusive or check
-            if ((password[indexA] == this.policyLetter) ^ (password[indexB] == this.policyLetter))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 
         public static int CountValidPasswords2(List<PasswordPolicy> passwordList)
@@ -104,7 +84,31 @@
                     numberOfValidPasswords++;
                 }
             }
+
             return numberOfValidPasswords;
+        }
+
+        public bool Check(string password)
+        {
+            return PasswordPolicy.Check(this.MinOccurence, this.MaxOccurence, this.PolicyLetter, password);
+        }
+
+        public bool Check2(string password)
+        {
+            // Reinterpret the password policy
+            // Decrement by 1 to convert from positiion to zero-indexed
+            int indexA = this.MinOccurence - 1;
+            int indexB = this.MaxOccurence - 1;
+
+            // Exclusive or check
+            if ((password[indexA] == this.PolicyLetter) ^ (password[indexB] == this.PolicyLetter))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

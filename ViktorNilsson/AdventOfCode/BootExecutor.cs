@@ -4,15 +4,15 @@
 
     public class BootExecutor
     {
-        public string instruction;
-        public int argument;
-        public int visits;
+        public string Instruction;
+        public int Argument;
+        public int Visits;
 
         public BootExecutor(string instructionRaw)
         {
-            this.instruction = instructionRaw.Split(' ')[0];
-            this.argument = int.Parse(instructionRaw.Split(' ')[1]);
-            this.visits = 0;
+            this.Instruction = instructionRaw.Split(' ')[0];
+            this.Argument = int.Parse(instructionRaw.Split(' ')[1]);
+            this.Visits = 0;
         }
 
         public static string[] GetInputData(string filePath)
@@ -37,27 +37,26 @@
         {
             int accumulator = 0;
             int instructionRow = 0;
-            int prevInstructionRow = 0;
             BootExecutor currentInstruction;
             do
             {
-                prevInstructionRow = instructionRow;
                 currentInstruction = instructionList[instructionRow];
-                instructionList[instructionRow].visits++;
-                switch (currentInstruction.instruction)
+                instructionList[instructionRow].Visits++;
+                switch (currentInstruction.Instruction)
                 {
                     case "nop":
                         instructionRow++;
                         break;
                     case "acc":
-                        accumulator += currentInstruction.argument;
+                        accumulator += currentInstruction.Argument;
                         instructionRow++;
                         break;
                     case "jmp":
-                        instructionRow += currentInstruction.argument;
+                        instructionRow += currentInstruction.Argument;
                         break;
                 }
-            } while (instructionRow <= instructionList.Count && instructionList[instructionRow].visits == 0);
+            }
+            while (instructionRow <= instructionList.Count && instructionList[instructionRow].Visits == 0);
 
             return accumulator;
         }
