@@ -6,7 +6,7 @@
     public class PassportValidator
     {
         private const string FilePathPassportRulesRegex = "../../../../AdventOfCode/InputData/PassportRulesRegex.txt";
-        private static List<string> passportValidKeys = new List<string> { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid" };
+        private static readonly List<string> passportValidKeys = new List<string> { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid" };
 
         // private static Dictionary<string, string> passportRules = new Dictionary<string, string> {
         // { "byr", "" }, {"iyr" }, {"eyr" }, {"hgt" }, {"hcl" }, {"ecl" }, {"pid" }, {"cid" } };
@@ -32,15 +32,23 @@
         public static bool ValidatePassport(Dictionary<string, string> parsedPassport)
         {
             // bool isEqual = Enumerable.SequenceEqual(parsedPassport.Keys.OrderBy(e => e), y.OrderBy(e => e));
-
             bool passportIsValid;
 
             // Valid password
             // Lazy solution that doesn't verify the name of the fields
             // Identify the special case where only cid is missing
-            if (!parsedPassport.ContainsKey("cid") && parsedPassport.Keys.Count == 7) passportIsValid = true;
-            else if (parsedPassport.Keys.Count == 8) passportIsValid = true;
-            else passportIsValid = false;
+            if (!parsedPassport.ContainsKey("cid") && parsedPassport.Keys.Count == 7)
+            {
+                passportIsValid = true;
+            }
+            else if (parsedPassport.Keys.Count == 8)
+            {
+                passportIsValid = true;
+            }
+            else
+            {
+                passportIsValid = false;
+            }
 
             return passportIsValid;
         }
@@ -80,10 +88,16 @@
             bool passportIsValid = true;
 
             // First test with the simple Validator
-            if (!PassportValidator.ValidatePassport(parsedPassport)) passportIsValid = false;
+            if (!PassportValidator.ValidatePassport(parsedPassport))
+            {
+                passportIsValid = false;
+            }
 
             // Second, invalidate by Regex
-            else if (!PassportValidator.ValidatePassportRegex(parsedPassport)) passportIsValid = false;
+            else if (!PassportValidator.ValidatePassportRegex(parsedPassport))
+            {
+                passportIsValid = false;
+            }
 
             return passportIsValid;
         }
@@ -94,7 +108,7 @@
 
             // Obtain the passport rules
             // TODO: This sghould only be new once. Maybe make into an instance variable?
-            string[] rawPassportTemplateRegex = InputDataHandler.ReadFileAsArray(FilePathPassportRulesRegex, "");
+            string[] rawPassportTemplateRegex = InputDataHandler.ReadFileAsArray(FilePathPassportRulesRegex, string.Empty);
             Dictionary<string, string> passportTemplateRegex = PassportValidator.ParseRawPassport(rawPassportTemplateRegex[0]);
 
             // Compare value for a kay with the allowed Regex expression

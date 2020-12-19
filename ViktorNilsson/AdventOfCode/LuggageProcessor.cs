@@ -6,7 +6,6 @@
 
     public class LuggageProcessor
     {
-
         public static string[] GetInputData(string filePath)
         {
             string[] groupAnswers = InputDataHandler.ReadFileAsArray(filePath);

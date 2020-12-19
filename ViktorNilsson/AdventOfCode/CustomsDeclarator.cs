@@ -6,7 +6,6 @@
 
     public class CustomsDeclarator
     {
-
         public static string[] GetInputData(string filePath)
         {
             string[] groupAnswers = InputDataHandler.ReadFileAsArray(filePath, "\r\n\r\n");
@@ -17,7 +16,7 @@
         public static int CountAnswers(string groupAnswer)
         {
             string cleanedAnswer = Regex.Replace(groupAnswer, @"\s+", string.Empty);
-            string uniqueAnswers = new String(cleanedAnswer.Distinct().ToArray());
+            string uniqueAnswers = new string(cleanedAnswer.Distinct().ToArray());
             int uniquePositiveAnswers = uniqueAnswers.Length;
             return uniquePositiveAnswers;
         }

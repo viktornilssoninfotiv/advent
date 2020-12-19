@@ -7,7 +7,11 @@ namespace AdventOfCode
     {
         private const string PuzzleFilePath = "../../../../AdventOfCode/InputData/DayThreeInput.txt";
         private const string TestDataFilePath = "../../../TestData/DayThreeTestData.txt";
-        private readonly int[,] slopes = new int[,] { { 1, 1 }, { 3, 1 }, { 5, 1 }, { 7, 1 }, { 1, 2 } };
+        private readonly int[,] slopes = new int[,] { { 1, 1 },
+        { 3, 1 },
+        { 5, 1 },
+        { 7, 1 },
+        { 1, 2 } };
 
         [SetUp]
         public void Setup()

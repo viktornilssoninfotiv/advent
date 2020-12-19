@@ -27,9 +27,9 @@ namespace AdventOfCode
         public void TestBootExecutorConstructor()
         {
             var instruction = new BootExecutor("nop +0");
-            Assert.AreEqual("nop", instruction.instruction);
-            Assert.AreEqual(0, instruction.argument);
-            Assert.AreEqual(0, instruction.visits);
+            Assert.AreEqual("nop", instruction.Instruction);
+            Assert.AreEqual(0, instruction.Argument);
+            Assert.AreEqual(0, instruction.Visits);
         }
 
         [Test]

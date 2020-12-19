@@ -5,12 +5,12 @@
 
     public class InputDataHandler
     {
-        public int colIdxMax;
-        public int rowIdxMax;
+        public int ColIdxMax;
+        public int RowIdxMax;
 
-        public static string[] ReadFileAsArray(string FilePath, string dataSplit = "\r\n")
+        public static string[] ReadFileAsArray(string filePath, string dataSplit = "\r\n")
         {
-            string fileContent = File.ReadAllText(FilePath);
+            string fileContent = File.ReadAllText(filePath);
 
             // string[] fileRows = Regex.Split(fileContent, @"\s+");
             string[] fileRows = fileContent.Split(new string[] { dataSplit }, StringSplitOptions.None);
@@ -25,8 +25,8 @@
             int columns = stringMap[0].Length;
             char[,] map = new char[rows, columns];
 
-            this.colIdxMax = columns;
-            this.rowIdxMax = rows;
+            this.ColIdxMax = columns;
+            this.RowIdxMax = rows;
 
             for (int row = 0; row < rows; row++)
             {
