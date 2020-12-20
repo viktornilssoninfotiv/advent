@@ -7,25 +7,42 @@
 
     public class Memory : InputDataHandler
     {
-        public static object Round(int iEnd, List<int> numList)
+        public static int Round(int iEnd, List<int> numList)
         {
-            for (int i = numList.Count; i < iEnd; i++)
+            //Dictionary<int, int> numDict = numList.ToDictionary(key => key, idx => numList.FindIndex(v => ));
+            Dictionary<int, int> numDict = new Dictionary<int, int>();
+            int lastNumber = 0;
+            int currentNumber = 0;
+            // Convert the list to a Dictionary where the numer is key and the last time it was said is the value
+            for (int idx = 0; idx < numList.Count && idx < iEnd; idx++)
+            {
+                lastNumber = numList[idx];
+                numDict[lastNumber] = idx + 1;
+            }
+
+            // Find the next number that shall be spoken 
+            for (int i = numList.Count + 1; i <= iEnd; i++)
             {
                 // if it was the first time the last number was spoken
-                int lastNumber = numList[i - 1];
-                if (numList.FindAll(num => num == lastNumber).Count == 1)
+                if (!numDict.Keys.Contains(lastNumber))
                 {
-                    numList.Add(0);
+                    numDict[lastNumber] = i - 1;
+                    currentNumber = 0;
+                }
+                else if (numDict[lastNumber] == i - 1)
+                {
+                    currentNumber = 0;
                 }
                 else
                 {
-                    int lastNumberIdx = numList.FindLastIndex(num => num == lastNumber);
-                    int lastNumberIdxPrev = numList.FindLastIndex(lastNumberIdx - 1, num => num == lastNumber);
-                    numList.Add(lastNumberIdx - lastNumberIdxPrev);
+                    currentNumber = i - numDict[lastNumber] - 1;
+                    numDict[lastNumber] = i - 1;
                 }
+
+                lastNumber = currentNumber;
             }
 
-            return numList[iEnd - 1];
+            return lastNumber;
         }
     }
 }

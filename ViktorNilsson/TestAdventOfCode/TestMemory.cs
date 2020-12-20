@@ -28,6 +28,8 @@ namespace AdventOfCode
         [TestCase(5, 3)]
         [TestCase(6, 3)]
         [TestCase(7, 1)]
+        [TestCase(8, 0)]
+        [TestCase(9, 4)]
         public void TestRound(int i, int expected)
         {
             var num = Memory.Round(i, this.testData);
@@ -49,7 +51,7 @@ namespace AdventOfCode
         {
             var num = Memory.Round(30000000, this.inputData);
 
-            Assert.AreEqual(662, num);
+            Assert.AreEqual(37312, num);
         }
     }
 }
