@@ -9,119 +9,57 @@ namespace AdventOfCode
         private const string DayPath = @"../../../../AdventOfCode/Day16/";
         private const string FilePathInputData = DayPath + "InputData.txt";
         private const string FilePathTestData = DayPath + "TestData.txt";
-        private List<int> testData;
-        private List<int> inputData;
+        private TicketTranslator testData;
+        private TicketTranslator inputData;
 
         [SetUp]
         public void Setup()
         {
-            this.testData = TicketTranslator.ReadFileAsArray(FilePathTestData);
-            this.inputData = TicketTranslator.ReadFileAsArray(FilePathInputData);
+            this.testData = new TicketTranslator(FilePathTestData);
+            this.inputData = new TicketTranslator(FilePathInputData);
         }
 
         [Test]
-        public void TestGetInputData()
+        public void TestGetTicket()
         {
-            string[] rawPassports = PassportValidator.GetInputData(FilePathTestData);
-            Assert.AreEqual(4, rawPassports.GetLength(0));
+            List<int> ticketFields = this.testData.GetTicket();
+            Assert.AreEqual(3, ticketFields.Count);
         }
 
         [Test]
-        public void TestParsePassport()
+        public void TestGetNearbyTicketsCount()
         {
-            string[] rawPassports = PassportValidator.GetInputData(FilePathTestData);
-            Dictionary<string, string> parsedPassport = PassportValidator.ParseRawPassport(rawPassports[0]);
-            Assert.AreEqual(8, parsedPassport.Count);
-            Assert.IsTrue(parsedPassport.ContainsKey("ecl"));
-            Assert.IsTrue(parsedPassport.ContainsValue("gry"));
-        }
-
-        [TestCase(0, true, TestName = "Valid Passport")]
-        [TestCase(1, false, TestName = "Invalid Passport")]
-        [TestCase(2, true, TestName = "Valid Passport missing cid")]
-        [TestCase(3, false, TestName = "Valid Passport missing multiple fields")]
-        public void TestValidatePassport(int iTestDataPassport, bool expectedValid)
-        {
-            string[] rawPassports = PassportValidator.GetInputData(FilePathTestData);
-            Dictionary<string, string> parsedPassport = PassportValidator.ParseRawPassport(rawPassports[iTestDataPassport]);
-            bool passportValid = PassportValidator.ValidatePassport(parsedPassport);
-            Assert.AreEqual(expectedValid, passportValid);
+            List<List<int>> nearbyTickets = this.testData.GetNearbyTickets();
+            Assert.AreEqual(4, nearbyTickets.Count);
         }
 
         [Test]
-        public void TestCountValidPassports()
+        public void TestGetNearbyTicketsFields()
         {
-            string[] rawPassports = PassportValidator.GetInputData(FilePathTestData);
-            int nuOfValidPassports = PassportValidator.CountValidPassports(rawPassports);
-            Assert.AreEqual(2, nuOfValidPassports);
+            var expectedFields = new List<int> { 7, 3, 47 };
+            List<List<int>> nearbyTickets = this.testData.GetNearbyTickets();
+            Assert.AreEqual(3, nearbyTickets[0].Count);
+            Assert.AreEqual(expectedFields, nearbyTickets[0]);
         }
 
         [Test]
-        public void TestCountValidPassportsEmpty()
+        public void TestGetFieldRules()
         {
-            string[] rawPassports = new string[] { "xx:yy" };
-            int nuOfValidPassports = PassportValidator.CountValidPassports(rawPassports);
-            Assert.AreEqual(0, nuOfValidPassports);
+            Dictionary<string, string[]> fieldRules = this.testData.GetFieldRules();
+            Assert.Contains("class", fieldRules.Keys);
+            Assert.AreEqual(3, fieldRules.Count);
         }
 
         [Test]
-        public void FindAnserDayFourPuzzleOne()
+        public void FindAnserDaySixteenPuzzleOne()
         {
-            string[] rawPassports = PassportValidator.GetInputData(FilePathInputData);
-            int nuOfValidPassports = PassportValidator.CountValidPassports(rawPassports);
-            Console.WriteLine("Number of valid passports: " + nuOfValidPassports);
-            Assert.AreEqual(228, nuOfValidPassports);
+            Assert.Warn("Not solved");
         }
 
         [Test]
-        public void TestCountValidPassportsStrictValid()
+        public void FindAnserDaySixteenPuzzleTwo()
         {
-            string[] rawPassports = PassportValidator.GetInputData(FilePathTestDataStrict);
-            int nuOfValidPassports = PassportValidator.CountValidPassportsStrict(rawPassports);
-            Assert.AreEqual(4, nuOfValidPassports);
-        }
 
-        [TestCase(0, true)]
-        [TestCase(1, true)]
-        [TestCase(2, true)]
-        [TestCase(3, true)]
-        [TestCase(4, false)]
-        [TestCase(5, false)]
-        [TestCase(6, false)]
-        [TestCase(7, false)]
-        public void TestValidatePassportStrict(int iTestDataPassport, bool expectedValid)
-        {
-            string[] rawPassports = PassportValidator.GetInputData(FilePathTestDataStrict);
-            Dictionary<string, string> parsedPassport = PassportValidator.ParseRawPassport(rawPassports[iTestDataPassport]);
-            bool passportValid = PassportValidator.ValidatePassportStrict(parsedPassport);
-            Assert.AreEqual(expectedValid, passportValid);
-        }
-
-        [TestCase(0, true)]
-        [TestCase(1, true)]
-        [TestCase(2, true)]
-        [TestCase(3, true)]
-        [TestCase(4, false)]
-        [TestCase(5, false)]
-        [TestCase(6, false)]
-        [TestCase(7, false)]
-        public void TestValidatePassportRegex(int iTestDataPassport, bool expectedValid)
-        {
-            string[] rawPassports = PassportValidator.GetInputData(FilePathTestDataStrict);
-            Dictionary<string, string> parsedPassport = PassportValidator.ParseRawPassport(rawPassports[iTestDataPassport]);
-            bool passportValid = PassportValidator.ValidatePassportRegex(parsedPassport);
-            Assert.AreEqual(expectedValid, passportValid);
-        }
-
-        [Test]
-        public void FindAnserDayFourPuzzleTwo()
-        {
-            string[] rawPassports = PassportValidator.GetInputData(FilePathInputData);
-            int nuOfValidPassports = PassportValidator.CountValidPassportsStrict(rawPassports);
-            Console.WriteLine("Number of valid passports: " + nuOfValidPassports);
-
-            // Assert.IsTrue(nuOfValidPassports < 176);
-            // Assert.AreEqual(185, nuOfValidPassports);
             Assert.Warn("Not solved");
         }
     }
