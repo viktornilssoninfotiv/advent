@@ -2,6 +2,7 @@ namespace AdventOfCode
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Numerics;
     using NUnit.Framework;
 
@@ -30,8 +31,8 @@ namespace AdventOfCode
         [Test]
         public void TestInitialize()
         {
-            var initial = new int[2 ^ 35];
-            var expected = new int[2 ^ 35];
+            var initial = new Dictionary<long, long>();
+            var expected = new Dictionary<long, long>();
             expected[7] = 101;
             expected[8] = 64;
             var updated = DockingInitializer.Initialize(initial, this.testData);
@@ -40,22 +41,23 @@ namespace AdventOfCode
         }
 
         [Test]
-        public void TestParseInstruction()
+        public void TestSum()
         {
-        }
+            var initial = new Dictionary<long, long>();
+            var updated = DockingInitializer.Initialize(initial, this.testData);
+            long sum = DockingInitializer.Sum(updated);
 
+            Assert.AreEqual(165, sum);
+        }
 
         [Test]
         public void FindAnswerDayThirteenPuzzleOne()
         {
-            var localTestData = this.inputData;
-            int startTimestamp = int.Parse(localTestData[0]);
-            var busList = ShuttleSearcher.GetBusList(localTestData);
-            (int departure, int waitTime, int busId) = ShuttleSearcher.EarliestDeparture(startTimestamp, busList);
-            Assert.AreEqual(296, waitTime * busId);
-            Assert.AreEqual(8, waitTime);
-            Assert.AreEqual(1000517, departure);
-            Assert.AreEqual(37, busId);
+            var initial = new Dictionary<long, long>();
+            var updated = DockingInitializer.Initialize(initial, this.inputData);
+            long sum = DockingInitializer.Sum(updated);
+
+            Assert.AreEqual(1, sum);
         }
 
         [Test]
