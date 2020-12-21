@@ -36,6 +36,35 @@
             return nearbyTickets;
         }
 
+        public Dictionary<string, string[]> GetFieldRules()
+        {
+            var fieldRules = new Dictionary<string, string[]>();
+            int iRow = 0;
+            string row = this.rawData[iRow];
+
+            while (row != string.Empty)
+            {
+                var ruleParts = Regex.Split(row, ": ");
+                fieldRules[ruleParts[0]] = Regex.Split(ruleParts[1], " or ");
+                iRow++;
+                row = this.rawData[iRow];
+            }
+
+            return fieldRules;
+        }
+
+        public int GetTicketScanningErrorRate()
+        {
+            int errorRate = 0;
+            var fieldRules = this.GetFieldRules();
+            var ticket = this.GetTicket();
+            var nearbyTickets = this.GetNearbyTickets();
+
+
+
+            return errorRate;
+        }
+
         private static List<int> GetTicketFields(string dataStr)
         {
             return Array.ConvertAll(dataStr.Split(','), int.Parse).ToList();
@@ -46,9 +75,50 @@
             return this.rawData.FindLastIndex(s => s == header) + 1;
         }
 
-        public Dictionary<string, string[]> GetFieldRules()
+        public static List<int> ValidateTicketFields(Dictionary<string, string[]> fieldRules, List<int> ticketFields)
         {
-            throw new NotImplementedException();
+            var invalidFields = new List<int>();
+
+            // Simplyfy the rules and only care about the number ranges
+            var rangeRules = SimplifyRules(fieldRules);
+
+            // Check all rules for every field
+            foreach (var field in ticketFields)
+            {
+                foreach (var rule in rangeRules)
+                {
+                    if ((field < rule[0] || field > rule[1]) && (field < rule[2] || field > rule[3]))
+                    {
+                        invalidFields.Add(field);
+                    }
+                    else
+                    {
+                        // If the field is valid for any rule it is OK
+                        break;
+                    }
+                }
+            }
+
+            return invalidFields;
+        }
+
+        private static List<int[]> SimplifyRules(Dictionary<string, string[]> fieldRules)
+        {
+            var rangeRules = new List<int[]>();
+            foreach (var rule in fieldRules.Values)
+            {
+                var intRange = new List<int>();
+                foreach (var range in rule)
+                {
+                    var numberRange = range.Split('-');
+                    intRange.AddRange(Array.ConvertAll(numberRange, s => int.Parse(s)));
+                }
+
+                rangeRules.Add(intRange.ToArray());
+
+            }
+
+            return rangeRules;
         }
     }
 }

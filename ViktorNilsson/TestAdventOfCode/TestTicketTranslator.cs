@@ -2,6 +2,7 @@ namespace AdventOfCode
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using NUnit.Framework;
 
     public class TestTicketTranslator
@@ -48,6 +49,34 @@ namespace AdventOfCode
             Dictionary<string, string[]> fieldRules = this.testData.GetFieldRules();
             Assert.Contains("class", fieldRules.Keys);
             Assert.AreEqual(3, fieldRules.Count);
+        }
+
+        [Test]
+        public void TestGetFieldRulesContent()
+        {
+            Dictionary<string, string[]> fieldRules = this.testData.GetFieldRules();
+            Assert.Contains("1-3", fieldRules["class"]);
+            Assert.Contains("5-7", fieldRules["class"]);
+            Assert.AreEqual(2, fieldRules["class"].Length);
+        }
+
+        [Test]
+        public void TestGetTicketScanningErrorRate()
+        {
+            int errorRate = this.testData.GetTicketScanningErrorRate();
+            Assert.AreEqual(71, errorRate);
+        }
+
+        [TestCase(0, new int[] { })]
+        [TestCase(1, new int[] { 4 })]
+        [TestCase(2, new int[] { 55 })]
+        [TestCase(3, new int[] { 12 })]
+        public void TestValidateTicketFields(int iTicket, int[] expectedInvalidFields)
+        {
+            var nearbyTickets = this.testData.GetNearbyTickets();
+            Dictionary<string, string[]> fieldRules = this.testData.GetFieldRules();
+            List<int> invalidFields = TicketTranslator.ValidateTicketFields(fieldRules, nearbyTickets[iTicket]);
+            Assert.AreEqual(expectedInvalidFields.ToList(), invalidFields);
         }
 
         [Test]
