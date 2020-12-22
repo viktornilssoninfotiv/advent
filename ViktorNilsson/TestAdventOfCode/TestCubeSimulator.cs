@@ -3,9 +3,9 @@ namespace AdventOfCode
     using System.Collections.Generic;
     using NUnit.Framework;
 
-    public class TestSeatSimulator
+    public class TestCubeSimulator
     {
-        private const string DayPath = @"../../../../AdventOfCode/Day11/";
+        private const string DayPath = @"../../../../AdventOfCode/Day17/";
         private const string FilePathInputData = DayPath + "InputData.txt";
         private const string FilePathTestData = DayPath + "TestData.txt";
         private char[,] testData;
@@ -14,26 +14,28 @@ namespace AdventOfCode
         [SetUp]
         public void Setup()
         {
-            var seatSim = new SeatSimulator();
-            this.testData = seatSim.GetInputDataMap(FilePathTestData);
-            this.inputData = seatSim.GetInputDataMap(FilePathInputData);
+            var cubesim = new CubeSimulator();
+            this.testData = cubesim.GetInputDataMap(FilePathTestData);
+            this.inputData = cubesim.GetInputDataMap(FilePathInputData);
         }
 
         [Test]
         public void TestGetInputData()
         {
             var localTestData = this.testData;
-            Assert.AreEqual(10, localTestData.GetLength(0));
-            Assert.AreEqual(10, localTestData.GetLength(1));
+            Assert.AreEqual(3, localTestData.GetLength(0));
+            Assert.AreEqual(3, localTestData.GetLength(1));
         }
 
         [Test]
-        public void TestAdjacentSeats()
+        public void TestGetInitialState()
         {
-            var seats = SeatSimulator.AdjacentSeats(this.testData, 0, 0);
-            var expectedSeats = new List<char> { 'L', '.', 'L', 'L' };
-            Assert.AreEqual(4, seats.Count);
-            Assert.AreEqual(expectedSeats, seats);
+            char[,,] initialState = CubeSimulator.GetInitialState(this.testData);
+            Assert.AreEqual(3, initialState.GetLength(0));
+            Assert.AreEqual(3, initialState.GetLength(1));
+            Assert.AreEqual(3, initialState.GetLength(2));
+            Assert.AreEqual('.', initialState[0, 0, 0]);
+            Assert.AreEqual('#', initialState[0, 1, 0]);
         }
 
         [Test]
