@@ -38,40 +38,49 @@ namespace AdventOfCode
             Assert.AreEqual('#', initialState[0, 1, 0]);
         }
 
-        [Test]
-        public void TestCountSeats()
+        [TestCase(0, new int[] { 0, 1, 0 })]
+        [TestCase(1, new int[] { 1, 2, 0 })]
+        [TestCase(2, new int[] { 2, 0, 0 })]
+        [TestCase(3, new int[] { 2, 1, 0 })]
+        [TestCase(4, new int[] { 2, 2, 0 })]
+        public void TestGetActiveInitialStates(int iCube, int[] expectedCoordinates)
         {
-            var seats = SeatSimulator.CountSeats(this.testData);
-            Assert.AreEqual(0, seats.occupied);
-            Assert.AreEqual(71, seats.free);
+            List<int[]> activeCubes = CubeSimulator.GetActiveCubes(this.testData);
+            Assert.AreEqual(5, activeCubes.Count);
+            Assert.AreEqual(expectedCoordinates, activeCubes[iCube]);
         }
 
-        [TestCase(1, 71)]
-        [TestCase(2, 20)]
-        [TestCase(5, 37)]
-        public void TestSimulate(int simulationSteps, int expectedOccupied)
+        [TestCase(1, 11)]
+        [TestCase(2, 21)]
+        [TestCase(3, 38)]
+        [TestCase(6, 112)]
+        public void TestSimulate(int simulationSteps, int expectedActive)
         {
-            var seats = SeatSimulator.Simulate(this.testData, simulationSteps);
-            int expectedFree = 71 - expectedOccupied;
-            Assert.AreEqual(expectedOccupied, seats.occupied);
-            Assert.AreEqual(expectedFree, seats.free);
-        }
-
-        [Test]
-        public void TestSimulateToSteadyState()
-        {
-            int expectedOccupied = 37;
-            var seats = SeatSimulator.Simulate(this.testData);
-            int expectedFree = 71 - expectedOccupied;
-            Assert.AreEqual(expectedOccupied, seats.occupied);
-            Assert.AreEqual(expectedFree, seats.free);
+            List<int[]> activeCubes = CubeSimulator.Simulate(this.testData, simulationSteps);
+            Assert.AreEqual(expectedActive, activeCubes.Count);
         }
 
         [Test]
-        public void FindAnswerDayElevenPuzzleOne()
+        public void TestGetSurroundingActiveCubes()
         {
-            var seats = SeatSimulator.Simulate(this.inputData);
-            Assert.AreEqual(2334, seats.occupied);
+            List<int[]> activeCubes = CubeSimulator.GetActiveCubes(this.testData);
+            int noOfActive = CubeSimulator.GetSurroundingActive(activeCubes[0], activeCubes);
+            Assert.AreEqual(1, noOfActive);
+        }
+
+        [Test]
+        public void TestGetSurroundingInctiveCubes()
+        {
+            List<int[]> activeCubes = CubeSimulator.GetActiveCubes(this.testData);
+            List<int[]> inactiveCubes = CubeSimulator.GetSurroundingInactive(activeCubes);
+            Assert.AreEqual(61, inactiveCubes.Count);
+        }
+
+        [Test]
+        public void FindAnswerDaySeventeenPuzzleOne()
+        {
+            List<int[]> activeCubes = CubeSimulator.Simulate(this.inputData, 6);
+            Assert.AreEqual(448, activeCubes.Count);
         }
 
         [Test]

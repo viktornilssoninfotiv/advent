@@ -6,48 +6,68 @@
 
     public class CubeSimulator : InputDataHandler
     {
-        private const char Free = 'L';
         private const char Active = '#';
         private const char Inactive = '.';
 
-        public static (int occupied, int free) CountSeats(char[,] seatMap)
+        public static List<int[]> Simulate(char[,] initialPlane, int simulationSteps = 100)
         {
-            string mapString = string.Empty;
-            foreach (var row in seatMap)
-            {
-                mapString += row.ToString();
-            }
-
-            int occupied = mapString.Count(f => f == Active);
-            int free = mapString.Count(f => f == Free);
-
-            return (occupied, free);
-        }
-
-        public static (int occupied, int free) Simulate(char[,] seatMap, int simulationSteps = 100)
-        {
-            var mapToSimulate = (char[,])seatMap.Clone();
-            char[,] simulatedMap;
-            var simSeats = CountSeats(seatMap);
+            var activeCubes = GetActiveCubes(initialPlane);
             for (int iSim = 0; iSim < simulationSteps; iSim++)
             {
-                simSeats = CountSeats(mapToSimulate);
-                simulatedMap = SimulateOneStep(mapToSimulate);
+                var updatedActiveCubes = new List<int[]>();
 
-                // Continue simulation as long as seats change
-                Console.WriteLine("Simseats: " + simSeats);
-                if (CountSeats(simulatedMap) != simSeats)
+                // TODO: Only loop the active cubes once and return two lists of adjacent active and adjacent inactive
+                // Check the surrounding conditions of each active cube
+                foreach (var cube in activeCubes)
                 {
-                    simSeats = CountSeats(simulatedMap);
-                    mapToSimulate = simulatedMap;
+                    int noOfSurroundingActive = GetSurroundingActive(cube, activeCubes);
+
+                    // Condition to keep the cube active
+                    if (noOfSurroundingActive == 2 || noOfSurroundingActive == 3)
+                    {
+                        updatedActiveCubes.Add(cube);
+                    }
                 }
-                else
+
+                // Get all adjacent inactive
+                // Count surrounding active
+                // Update
+                var inactiveCubes = GetSurroundingInactive(activeCubes);
+                foreach (var cube in inactiveCubes)
                 {
-                    break;
+                    int noOfSurroundingActive = GetSurroundingActive(cube, activeCubes);
+
+                    // Condition to make the inactive cube go active
+                    if (noOfSurroundingActive == 3)
+                    {
+                        updatedActiveCubes.Add(cube);
+                    }
+                }
+
+                activeCubes = updatedActiveCubes;
+            }
+
+            return activeCubes;
+        }
+
+        public static List<int[]> GetActiveCubes(char[,] initialPlane)
+        {
+            var activeCubes = new List<int[]>();
+
+            for (int x = 0; x < initialPlane.GetLength(0); x++)
+            {
+                for (int y = 0; y < initialPlane.GetLength(1); y++)
+                {
+                    var currentCube = initialPlane[x, y];
+                    if (currentCube == CubeSimulator.Active)
+                    {
+                        // Save the coordinates. Z is zer o in the initial plane
+                        activeCubes.Add(new int[] { x, y, 0 });
+                    }
                 }
             }
 
-            return simSeats;
+            return activeCubes;
         }
 
         public static char[,,] GetInitialState(char[,] initialPlane)
@@ -75,65 +95,76 @@
             return initialState;
         }
 
-        private static char[,] SimulateOneStep(char[,] seatMap)
+        public static int GetSurroundingActive(int[] cube, List<int[]> activeCubes)
         {
-            var simulatedMap = (char[,])seatMap.Clone();
+            int noOfActive = 0;
 
-            for (int row = 0; row < seatMap.GetLength(0); row++)
+            // Loop over all surrounding coordinates (and evaluate ralative to the supplied cube
+            for (int x = -1; x <= 1; x++)
             {
-                for (int col = 0; col < seatMap.GetLength(1); col++)
+                for (int y = -1; y <= 1; y++)
                 {
-                    // Check for floor
-                    if (seatMap[row, col] == Inactive)
+                    for (int z = -1; z <= 1; z++)
                     {
-                        continue;
-                    }
+                        var cubeToEvaluate = new int[]
+                        {
+                            cube[0] + x,
+                            cube[1] + y,
+                            cube[2] + z,
+                        };
 
-                    // Obtain adjacent seats
-                    var adjSeats = AdjacentSeats(seatMap, row, col);
+                        // Make sure to not count the supplied cube
+                        if (cubeToEvaluate.SequenceEqual(cube))
+                        {
+                            continue;
+                        }
 
-                    // Free seat becoming occupied
-                    if (adjSeats.All(seat => (seat == Free || seat == Inactive)))
-                    {
-                        simulatedMap[row, col] = Active;
-                        continue;
-                    }
-
-                    // Occupied seat becoming free
-                    bool seatIsOccupied = seatMap[row, col] == Active;
-                    int adjOccupiedSeats = adjSeats.Count(seat => seat == Active);
-
-                    // adjOccupiedSeats must be larger than 4 since the current seat is included
-                    if (seatIsOccupied && (adjOccupiedSeats > 4))
-                    {
-                        simulatedMap[row, col] = Free;
+                        // Check if the cube to evaluate is active
+                        else if (activeCubes.Any(p => p.SequenceEqual(cubeToEvaluate)))
+                        {
+                            noOfActive++;
+                        }
                     }
                 }
             }
 
-            return simulatedMap;
+            return noOfActive;
         }
 
-        public static List<char> AdjacentSeats(char[,] seatMap, int row, int col)
+        public static List<int[]> GetSurroundingInactive(List<int[]> activeCubes)
         {
-            // TODO: Handle cases at the edges where current solution indexes outside the map
-            var adjSeats = new List<char>();
-            for (int i = -1; i <= 1; i++)
-            {
-                for (int j = -1; j <= 1; j++)
-                {
-                    int iRow = row + i;
-                    int iCol = col + j;
+            var inactiveCubes = new List<int[]>();
 
-                    // Only check an adjacent seat if inside the map bounds
-                    if (iRow >= 0 && iRow < seatMap.GetLength(0) && iCol >= 0 && iCol < seatMap.GetLength(1))
+            foreach (var cube in activeCubes)
+            {
+                // Loop over all surrounding coordinates (and evaluate ralative to the supplied cube
+                for (int x = -1; x <= 1; x++)
+                {
+                    for (int y = -1; y <= 1; y++)
                     {
-                        adjSeats.Add(seatMap[iRow, iCol]);
+                        for (int z = -1; z <= 1; z++)
+                        {
+                            var cubeToEvaluate = new int[]
+                            {
+                            cube[0] + x,
+                            cube[1] + y,
+                            cube[2] + z,
+                            };
+
+                            // Only add inactive cubes that are not already added
+                            bool isActiveCube = activeCubes.Any(p => p.SequenceEqual(cubeToEvaluate));
+                            bool alreadyExist = inactiveCubes.Any(p => p.SequenceEqual(cubeToEvaluate));
+
+                            if (!isActiveCube && !alreadyExist)
+                            {
+                                inactiveCubes.Add(cubeToEvaluate);
+                            }
+                        }
                     }
                 }
             }
 
-            return adjSeats;
+            return inactiveCubes;
         }
     }
 }
