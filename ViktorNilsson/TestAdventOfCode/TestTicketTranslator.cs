@@ -82,7 +82,8 @@ namespace AdventOfCode
         [Test]
         public void FindAnserDaySixteenPuzzleOne()
         {
-            Assert.Warn("Not solved");
+            int errorRate = this.inputData.GetTicketScanningErrorRate();
+            Assert.AreEqual(29019, errorRate);
         }
 
         [Test]

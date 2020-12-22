@@ -57,10 +57,14 @@
         {
             int errorRate = 0;
             var fieldRules = this.GetFieldRules();
-            var ticket = this.GetTicket();
             var nearbyTickets = this.GetNearbyTickets();
+            var invalidFields = new List<int>();
+            foreach (var ticket in nearbyTickets)
+            {
+                invalidFields.AddRange(ValidateTicketFields(fieldRules, ticket));
+            }
 
-
+            errorRate = invalidFields.Sum();
 
             return errorRate;
         }
@@ -85,15 +89,13 @@
             // Check all rules for every field
             foreach (var field in ticketFields)
             {
+                invalidFields.Add(field);
                 foreach (var rule in rangeRules)
                 {
-                    if ((field < rule[0] || field > rule[1]) && (field < rule[2] || field > rule[3]))
-                    {
-                        invalidFields.Add(field);
-                    }
-                    else
+                    if ((field >= rule[0] && field <= rule[1]) || (field >= rule[2] && field <= rule[3]))
                     {
                         // If the field is valid for any rule it is OK
+                        invalidFields.Remove(field);
                         break;
                     }
                 }
@@ -115,7 +117,6 @@
                 }
 
                 rangeRules.Add(intRange.ToArray());
-
             }
 
             return rangeRules;
