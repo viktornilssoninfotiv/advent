@@ -31,6 +31,7 @@ namespace AdventOfCode
         [TestCase("1+2*2", 6)]
         [TestCase("1+1+2*2", 8)]
         [TestCase("1+2*(2+1)", 9)]
+        [TestCase("(1+2)*(2+1)", 9)]
         public void TestSolveSimple(string problem, int expectedAnswer)
         {
             int answer = HomeworkSolver.Solve(problem);
