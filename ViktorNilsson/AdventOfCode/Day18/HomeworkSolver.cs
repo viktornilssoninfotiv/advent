@@ -13,39 +13,13 @@
 
             // Trim away whitespaces
             var remainingProblem = Regex.Replace(problem, " ", string.Empty);
-            int firstArgument;
-            int iFirstArgument = 0;
-
-            if (remainingProblem[0] == '(')
-            {
-                // Extract the part within parenthesis and solve that first
-                var iEndParenthesis = remainingProblem.IndexOf(')');
-                firstArgument = Solve(remainingProblem.Substring(iFirstArgument + 1, iEndParenthesis - iFirstArgument - 1));
-                iFirstArgument = iEndParenthesis;
-            }
-            else
-            {
-                firstArgument = int.Parse(remainingProblem[iFirstArgument].ToString());
-            }
-
-            remainingProblem = remainingProblem.Substring(iFirstArgument + 1);
+            int firstArgument = GetArgument(ref remainingProblem);
 
             while (remainingProblem.Length > 0)
             {
-                int secondArgument;
-                int iSecondArgument = 1;
-                if (remainingProblem[iSecondArgument] == '(')
-                {
-                    // Extract the part within parenthesis and solve that first
-                    var iEndParenthesis = remainingProblem.IndexOf(')');
-                    secondArgument = Solve(remainingProblem.Substring(2, iEndParenthesis - 2));
-                    iSecondArgument = iEndParenthesis;
-                }
-                else
-                {
-                    secondArgument = int.Parse(remainingProblem[iSecondArgument].ToString());
-                }
                 char operand = remainingProblem[0];
+                remainingProblem = remainingProblem.Substring(1);
+                int secondArgument = GetArgument(ref remainingProblem);
 
                 // TODO: Handle parenthesis (first in the middle of the string then at the beginning, then multiple)
                 switch (operand)
@@ -59,11 +33,39 @@
                 }
 
                 firstArgument = answer;
-                remainingProblem = remainingProblem.Substring(iSecondArgument + 1);
             }
 
             return answer;
         }
-    }
 
+        private static int GetArgument(ref string remainingProblem)
+        {
+            int argument;
+            int iArgument = 0;
+            if (remainingProblem[iArgument] == '(')
+            {
+                var iEndParenthesis = remainingProblem.IndexOf(')');
+
+                // Handle the case for parenthesis within another parenthesis
+                if (iEndParenthesis == -1)
+                {
+                    // if no end parenthesis found, keep the string until the end
+                    argument = Solve(remainingProblem = remainingProblem.Substring(1));
+                }
+                else
+                {
+                    argument = Solve(remainingProblem.Substring(1, iEndParenthesis - 1));
+                    iArgument = iEndParenthesis;
+                }
+            }
+            else
+            {
+                argument = int.Parse(remainingProblem[iArgument].ToString());
+            }
+
+            remainingProblem = remainingProblem.Substring(iArgument + 1);
+
+            return argument;
+        }
+    }
 }
