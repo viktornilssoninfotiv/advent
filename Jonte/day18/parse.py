@@ -7,6 +7,8 @@ operators = {'+': lambda x, y: x + y,
 
 
 def eval_rpn(cs):
+    # evaluate expression in Reverse Polish Notation
+
     s = []
 
     for c in cs:
@@ -21,7 +23,7 @@ def eval_rpn(cs):
     return s
             
 def to_rpn(cs, precedence):
-    # generate a reverse polish notation string using Dijkstra's shunting-yard algorithm
+    # Dijkstra's shunting-yard algorithm
 
     operator_stack = []
     output_queue = []
@@ -60,7 +62,6 @@ def to_rpn(cs, precedence):
         output_queue.append(operator_stack.pop())                 
 
     return ''.join(output_queue)
-            
 
 
 from data import data
@@ -80,5 +81,3 @@ print(sum(eval_rpn(to_rpn(remove_whitespace(e), precedence_1))[0] for e in expre
 
 precedence_2 = {'+': 1, '-': 1, '*': 2}
 print(sum(eval_rpn(to_rpn(remove_whitespace(e), precedence_2))[0] for e in expressions))
-
-
