@@ -34,24 +34,33 @@ namespace AdventOfCode
         [TestCase("(1+2)*(2+1)", 9)]
         public void TestSolveSimple(string problem, int expectedAnswer)
         {
-            int answer = HomeworkSolver.Solve(problem);
+            long answer = HomeworkSolver.Solve(problem);
             Assert.AreEqual(expectedAnswer, answer);
         }
 
         [TestCase(0, 26)]
         [TestCase(1, 437)]
         [TestCase(2, 12240)]
-        [TestCase(3, 13622)]
+        [TestCase(3, 13632)]
         public void TestSolve(int iProblem, int expectedAnswer)
         {
-            int answer = HomeworkSolver.Solve(this.testData[iProblem]);
+            long answer = HomeworkSolver.Solve(this.testData[iProblem]);
+            Assert.AreEqual(expectedAnswer, answer);
+        }
+
+        [Test]
+        public void TestSolveAll()
+        {
+            int expectedAnswer = 26 + 437 + 12240 + 13632;
+            long answer = HomeworkSolver.SolveAll(this.testData);
             Assert.AreEqual(expectedAnswer, answer);
         }
 
         [Test]
         public void FindAnserDaySixteenPuzzleOne()
         {
-            Assert.Warn("Not solved");
+            long answer = HomeworkSolver.SolveAll(this.inputData);
+            Assert.Greater(9704658479670, answer);
         }
 
         [Test]

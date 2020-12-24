@@ -7,40 +7,43 @@
 
     public class HomeworkSolver : InputDataHandler
     {
-        public static int Solve(string problem)
+        public static long Solve(string problem)
         {
-            int answer = 0;
-
             // Trim away whitespaces
             var remainingProblem = Regex.Replace(problem, " ", string.Empty);
-            int firstArgument = GetArgument(ref remainingProblem);
+            long answer = GetArgument(ref remainingProblem);
 
-            while (remainingProblem.Length > 0)
+            // Check length > 1 in case of a leftover "double parenthesis"
+            while (remainingProblem.Length > 1)
             {
                 char operand = remainingProblem[0];
                 remainingProblem = remainingProblem.Substring(1);
-                int secondArgument = GetArgument(ref remainingProblem);
+                if (operand == ')')
+                {
+                    operand = remainingProblem[0];
+                    remainingProblem = remainingProblem.Substring(1);
+                }
 
-                // TODO: Handle parenthesis (first in the middle of the string then at the beginning, then multiple)
+                long secondArgument = GetArgument(ref remainingProblem);
+
                 switch (operand)
                 {
                     case '+':
-                        answer = firstArgument + secondArgument;
+                        answer += secondArgument;
                         break;
                     case '*':
-                        answer = firstArgument * secondArgument;
+                        answer *= secondArgument;
                         break;
-                }
 
-                firstArgument = answer;
+                }
             }
 
             return answer;
         }
 
-        private static int GetArgument(ref string remainingProblem)
+        private static long GetArgument(ref string remainingProblem)
         {
-            int argument;
+            long argument;
             int iArgument = 0;
             if (remainingProblem[iArgument] == '(')
             {
@@ -50,22 +53,36 @@
                 if (iEndParenthesis == -1)
                 {
                     // if no end parenthesis found, keep the string until the end
-                    argument = Solve(remainingProblem = remainingProblem.Substring(1));
+                    argument = Solve(remainingProblem.Substring(1));
+                    iArgument = remainingProblem.Length;
                 }
                 else
                 {
                     argument = Solve(remainingProblem.Substring(1, iEndParenthesis - 1));
-                    iArgument = iEndParenthesis;
+                    iArgument = iEndParenthesis + 1;
                 }
             }
             else
             {
-                argument = int.Parse(remainingProblem[iArgument].ToString());
+                argument = long.Parse(remainingProblem[iArgument].ToString());
+                iArgument++;
             }
 
-            remainingProblem = remainingProblem.Substring(iArgument + 1);
+            remainingProblem = remainingProblem.Substring(iArgument);
 
             return argument;
+        }
+
+        public static long SolveAll(string[] problems)
+        {
+            long sum = 0;
+
+            foreach (var problem in problems)
+            {
+                sum += Solve(problem);
+            }
+
+            return sum;
         }
     }
 }
