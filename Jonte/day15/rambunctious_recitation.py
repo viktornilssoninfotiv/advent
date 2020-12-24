@@ -33,4 +33,9 @@ input = [0,6,1,7,2,19,20]
 print(simulate_numbers(input, finish = 2020))
 
 # part 2
+import time
+
+t0 = time.time()
 print(simulate_numbers(input, finish = 30000000))
+t1 = time.time()
+print("simulated 30,000,000 in {} seconds".format(t1 - t0))
