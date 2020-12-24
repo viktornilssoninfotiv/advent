@@ -12,11 +12,10 @@ namespace cs = std::chrono;
 namespace util {
 
 std::vector<std::string> re_search(const std::regex& r,
-                                   const std::string& str) {
+                                   const std::string& s) {
   std::vector<std::string> out;
-
-  std::smatch m;
-  if (std::regex_search(str, m, r)) {
+  
+  if (std::smatch m; std::regex_search(s, m, r)) {
     for (const auto& sub_match : m) {
       out.push_back(sub_match.str());
     }
