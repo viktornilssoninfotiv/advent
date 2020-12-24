@@ -38,6 +38,22 @@ namespace AdventOfCode
             Assert.AreEqual(expectedAnswer, answer);
         }
 
+        [TestCase("(1+2)*(2+1)", 3)]
+        [TestCase("((1+2)+(2+1))", 6)]
+        public void TestGetArgument(string problem, int expectedArgument)
+        {
+            long argument = HomeworkSolver.GetArgument(ref problem);
+            Assert.AreEqual(expectedArgument, argument);
+        }
+
+        [TestCase("(1+2)*(2+1)", 4)]
+        [TestCase("((1+2)+(2+1))", 12)]
+        public void TestFindEndParenthesis(string problem, int expectedIndex)
+        {
+            int index = HomeworkSolver.FindEndParenthesis(problem);
+            Assert.AreEqual(expectedIndex, index);
+        }
+
         [TestCase(0, 26)]
         [TestCase(1, 437)]
         [TestCase(2, 12240)]
@@ -57,10 +73,10 @@ namespace AdventOfCode
         }
 
         [Test]
-        public void FindAnserDaySixteenPuzzleOne()
+        public void FindAnserDayEighteenPuzzleOne()
         {
             long answer = HomeworkSolver.SolveAll(this.inputData);
-            Assert.Greater(9704658479670, answer);
+            Assert.AreEqual(11004703763391, answer);
         }
 
         [Test]
