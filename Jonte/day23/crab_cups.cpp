@@ -27,6 +27,7 @@ void connect(node* n1, node* n2) {
 }
 
 std::vector<node> init_circular_nodes(size_t size) {
+  // pad with unused nodes to allow simple indexing by value
   std::vector<node> nodes(size + 2);
 
   for (size_t i = 1; i < size + 1; ++i) {
@@ -55,28 +56,27 @@ void simulate_crab_moves(std::vector<node>& nodes, node* start_node,
   for (size_t i = 0; i < n_moves; ++i) {
     int curr_label = curr_node->val;
 
-    // pick up
+    // pick up cups
     node* pick_up_first = curr_node->next;
     node* pick_up_last = advance(curr_node, 3);
 
-    // remove picked up cups from list
+    // detach picked-up cups from list
     connect(curr_node, pick_up_last->next);
 
     int pick_up_labels[] = {pick_up_first->val, pick_up_first->next->val,
                             pick_up_last->val};
 
-    //
     int destination_label =
         get_destination_label(curr_label - 1, pick_up_labels, size);
     node* destination_node = &nodes[destination_label];
 
-    // re-insert picked-up cups after destination cup
+    // re-attach picked-up cups after destination cup
     node* old_next = destination_node->next;
 
     connect(destination_node, pick_up_first);
     connect(pick_up_last, old_next);
 
-    //
+    // finally, advance current node for next iteration
     curr_node = curr_node->next;
   }
 }
@@ -106,28 +106,31 @@ int main() {
     connect(&nodes[l], &nodes[r]);
   }
   connect(&nodes[input[size - 1]], &nodes[input[0]]);
-
+  
+  // simulate
   node* start = &nodes[input[0]];
   simulate_crab_moves(nodes, start, size, 100);
   print_nodes(nodes[1].next, size - 1);
 
   /* ---------- part 2 ---------- */
-  size_t size_big = 1e6;
-  auto nodes_big = init_circular_nodes(size_big);
+  size_t big_size = 1e6;
+  auto big_nodes = init_circular_nodes(big_size);
 
   for (size_t i = 0; i < size - 1; ++i) {
     int l = input[i];
     int r = input[i + 1];
-    connect(&nodes_big[l], &nodes_big[r]);
+    connect(&big_nodes[l], &big_nodes[r]);
   }
-  connect(&nodes_big[input[size - 1]], &nodes_big[size + 1]);
-  connect(&nodes_big[size_big], &nodes_big[input[0]]);
+  connect(&big_nodes[input[size - 1]], &big_nodes[size + 1]);
+  connect(&big_nodes[big_size], &big_nodes[input[0]]);
 
+  // simulate
   auto t0 = cs::high_resolution_clock::now();
-  simulate_crab_moves(nodes_big, &nodes_big[input[0]], size_big, 1e7);
+  simulate_crab_moves(big_nodes, &big_nodes[input[0]], big_size, 1e7);
   auto t1 = cs::high_resolution_clock::now();
 
-  std::cout << "simulated 10 million rouns of crab cups with 1 million cups in "
-            << cs::duration_cast<cs::milliseconds>(t1 - t0).count() << " ms.\n";
-  print_nodes(nodes_big[1].next, 2);
+  std::cout
+      << "simulated 10 million rounds of crab cups with 1 million cups in "
+      << cs::duration_cast<cs::milliseconds>(t1 - t0).count() << " ms\n";
+  print_nodes(big_nodes[1].next, 2);
 }
