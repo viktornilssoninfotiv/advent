@@ -2,6 +2,12 @@
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/
 
+*.o
+*.lib
+*.dll
+*.a
+*.so
+*.exe
 
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
