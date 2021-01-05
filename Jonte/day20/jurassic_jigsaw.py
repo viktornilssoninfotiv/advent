@@ -165,12 +165,12 @@ def stitch_tiles(puzzle_grid, tiles, grid_size, tile_size):
             tile_orientations = get_tile_orientations(tile)
             transformed_tile = tile_orientations[q]
 
-            im[j_start:j_end, i_start:i_end] = transformed_tile[1 : -1, 1 : -1]
+            im[j_start : j_end, i_start : i_end] = transformed_tile[1 : -1, 1 : -1]
 
     return im
 
 
-def find_sea_monster(im):
+def count_sea_monsters(im):
     monster = np.array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
                         [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1],
                         [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0]])
@@ -220,5 +220,5 @@ print(grid[0][0][0] * grid[0][-1][0] * grid[-1][0][0] * grid[-1][-1][0])
 
 puzzle_image = stitch_tiles(grid, dict(tiles), size, len(tiles[0][1]) - 2)
 
-n_monsters = [find_sea_monster(im) for im in get_tile_orientations(puzzle_image)]
+n_monsters = [count_sea_monsters(im) for im in get_tile_orientations(puzzle_image)]
 print(sum(puzzle_image.ravel()) - max(n_monsters) * 15)
