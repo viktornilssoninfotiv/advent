@@ -4,6 +4,7 @@ from submarine import Command
 
 
 class TestSubmarine(unittest.TestCase):
+    """Test Cases for Day 2 class Submarine"""
     def test_command_list(self):
         submarine = Submarine("test_data.txt")
         command = submarine.commands[1]

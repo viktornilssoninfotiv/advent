@@ -4,6 +4,7 @@ from file_reader import FileReader
 
 
 class Submarine:
+    """Implementation for Day 2"""
     def __init__(self, file_name):
         commands_raw = FileReader.to_list(file_name)
         self.commands = []
@@ -28,6 +29,7 @@ class Submarine:
 
 @dataclass
 class Command:
+    """Helper class to hold components of a command"""
     control: str
     amount: int
 
