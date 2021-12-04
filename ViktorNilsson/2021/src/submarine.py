@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-
 from file_reader import FileReader
 
 

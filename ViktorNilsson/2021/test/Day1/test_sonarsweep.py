@@ -1,9 +1,9 @@
 import unittest
-
 from sonarsweep import SonarSweep
 
 
 class TestSonarSweep(unittest.TestCase):
+    """Test cases for Day 1"""
     def test_count_depth_increases(self):
         sonar_sweep = SonarSweep("test_data.txt")
         increases = sonar_sweep.count_depth_increases()
