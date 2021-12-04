@@ -3,7 +3,7 @@ from file_reader import FileReader
 
 class SonarSweep:
     def __init__(self, file_name):
-        self.depth_report = FileReader.to_list(file_name)
+        self.depth_report = FileReader.to_float_list(file_name)
 
     def count_depth_increases(self):
         increases = 0

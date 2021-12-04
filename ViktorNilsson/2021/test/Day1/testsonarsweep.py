@@ -1,4 +1,5 @@
 import unittest
+
 from sonarsweep import SonarSweep
 
 
@@ -24,6 +25,7 @@ class TestSonarSweep(unittest.TestCase):
         increases = sonar_sweep.count_depth_increases_3sum()
         print("Number of increases for Day 1 Puzzle 2: " + str(increases))
         self.assertEqual(1600, increases)
+
 
 if __name__ == '__main__':
     unittest.main()
